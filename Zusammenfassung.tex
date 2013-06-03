@@ -1,0 +1,308 @@
+
+
+
+
+
+\documentclass[a4paper]{article}
+
+% Mathematik-Pakete
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{paralist}
+
+
+%\usepackage[ansinew]{inputenc}
+%\usepackage[T1]{fontenc}
+
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}  
+%\usepackage[T1]{fontenc}
+%\usepackage{lmodern}          
+
+
+ \usepackage[ngerman]{babel}
+
+\begin{document}
+
+\section{2 Conservation laws of fluid motion and boundary conditions}
+\begin{itemize}
+\item Explain the physical meaning of the different terms in the conservation equations (link between mathematical “operations” and physical behaviour)
+
+Präsentation Folie 7
+
+Impulsgleichung
+
+
+Energiebilanz
+
+Massenbilanz
+
+
+
+\item Explain the physical meaning of the different terms in a general transport equation
+
+dito obne
+
+\item Derive continuity and momentum equations from basic physical idea (mass conservation, Newton second law) and general transport equation with appropriate variable substitutions
+Präsentation Folie 5
+
+Kontinuitätsgleichung bedeutet Qellenfrei, Erhaltend
+
+\end{itemize}
+
+
+
+\section{3 Turbulence and its modelling}
+\begin{itemize}
+\item Explain the properties of turbulence and their influence on the flow field. Which changes can be observed compared to laminar flow?
+
+Fole 5
+Nichtlinear
+Zufälligkeit (nicht Reproduzeirbar)
+3D Densional, auch wenn Mittelwert in 1D und 2D variert
+hohe Wirbelstärke
+Energiewirbel disipiert (wird immer kleiner)
+intermitetci, es gibt Nicht turbulenz strömung oder nicht aber auch turbulenz fluss
+Hohe diffusitität von Impuls und Energie (gute verteilung)
+Trubulenz ist lokaer umwelt abhänig (z.B. Absatz)
+
+\item Explain the main approximations using RANS and LES modelling, including assumptions (what is computed and how, what is modelled and how)
+
+Reynolds- Averaged Navier-Stokes Equations (RANS)\\
+Geschwindikeit und Druck wir in einen gemittelten und einen fluchtuierenden Anteil getrennt
+%u=u_strich + u'
+%p=p_strich + p'
+Diese Teile zustälich zu Impulsgleichung
+einer neuer Term ein symetrischer Reynoldsspannungstensor von 2ter Sturfe, da es nicht mehr linear ist sonder Multipliziert wir
+Folie 14, Trubulenze
+
+Large Eddy Simulation (LES)
+Zeitabhänige Simulation
+genaue Simulation nicht komerziell
+
+
+\item What are wall functions, idea behind them, advantages and disadvantages tabelle funktion
+
+grad 0
+0
+wandfunktion bei hohen reynoldzahl vereinfacht komplexität
+dimensionlose Kennzahl der Abstand der ersten Zelle am Rand, siehe Bild Silvio
+
+\end{itemize}
+
+
+\section{4 The finite volume method for the diffusion problem}
+\begin{itemize}
+
+\item Derive a finite-volume discretization for a one-dimensional heat conduction problem. 
+
+mit Unterlagen... Folie 14
+
+\item Demonstrate, using Taylor series expansion, that the central differencing scheme has second order accuracy.
+
+Folie 11, siehe auch Multiphysik
+
+
+\end{itemize}
+
+
+
+
+\section{5 The finite volume method for convection-diffusion problems}
+\begin{itemize}
+\item Explain why the CDS (central differencing scheme) does not work for large velocities.
+Pe - Klee Zahl verhänihs zeischen Konvektion und Diffusion
+Internet
+
+\item Define the Peclet number
+Pe - Klee Zahl verhänihs zeischen Konvektion und Diffusion
+
+\item Explain why the upwind discretization (UD) works better. Explain the disadvantages of upwind discretization.
+Richtung im Wind, 
+disadvatianges:
+- es leidet von falscher numerischer
+- ist nur 1 ordungng und eshalb eher ungenau
+advatianges
+- grosse Zeitschritte
+- schlechteres netz
+- 
+
+
+
+\item Explain the terms: conservativeness, boundedness, transportiveness
+nachlesen...
+
+
+
+\item Explain how the hybrid differencing scheme works.
+idea: kombination von upwind und central, 1 Ordnung....
+upwind: hoche PeKlee Zahen (hohe konvektion und wenig diffusion)
+centrel diffenzing: kleine PeKlee Zahlen (weil mehr diffusion)
+
+\item Explain the QUICK scheme. Advantages and disadvantages.
+optimierung von upwind, schaut noch weiter in Zukunft und gewichtet die Zukunft
+sehr negativ ist es überschwingt, dies ist total unphysikalisch
+positiv näher an der exakten lösung
+
+
+
+
+\item Describe the idea behind TVD schemes.
+TVD steht für Total Vaariation Diminishing,
+Ideeist die Hügel zu reduzieren
+Folie 19
+
+
+
+\end{itemize}
+
+
+
+\section{6 Solution algorithms for pressure velocity coupling in steady flows}
+\begin{itemize} 
+
+\item Difference between incompressible (pressure-based) and compressible (density based) approach/codes => which equations are available for which variable
+incompressibel, dichteänderung gleich 0 und p ist konstant
+compressible, dichteänderung ...
+folen 7
+
+
+\item Differences between momentum equations and general scalar transport equations => new aspects to be tackled
+??? zu folie 11
+
+\item Explain the SIMPLE procedure for pressure-velocity coupling
+siehe folie 14
+
+\item Explain the role of relaxation factors. 
+Flussdiagramm siehe Folie 14
+
+
+\item Why are they used?
+folie 20
+
+
+\end{itemize}
+
+
+
+\section{7 Solution of discretized equations}
+\begin{itemize}
+\item Explain why iterative methods are necessary to solve sparse linear systems.
+schneller gelöst, numerisch weniger aufwindig
+Iterative löser ...
+sparse linear system sind einfach pararellisierbar
+
+
+\item Describe the Jacobi and Gauss-Seidel iterative methods
+Jacobi iterative method: 
+möglichst nahe an einheitsmatix kommen
+eigenwert muss keiner 1 sein, wird dafür langsamer 
+
+Gauss- Seidel method: 
+nicht paararellisierbar, konvergit schneller
+
+\item Describe the idea behind the multi-grid method
+Anfangsbedingungne 
+Stufenweises lösen auf verschiednen netzgrüssen
+foleie 19 (Ansys arbeitet so)
+feien lösen
+grobes netzt lösen
+dann wieder feiner...
+
+\end{itemize}
+
+
+
+\section{8 The finite volume method for unsteady flows}
+\begin{itemize}
+\item Describe the three common schemes for time discretization:
+\begin{itemize}
+\item Explicit (forward Euler)
+...
+
+\item Cranck-Nicholson
+...
+
+\item Implicit (backward Euler)
+...
+
+\end{itemize}
+\item What are the advantages and disadvantages of the different schemes?
+
+
+\item How does the SIMPLE scheme have to be modified for a transient simulation?
+
+
+
+\end{itemize}
+
+
+
+
+
+\section{9 Implementation of boundary conditions}
+\begin{itemize}
+
+\item Name 5 important boundary conditions
+Dirichlet boundary conditions
+Neumann boundary conditions
+Robin bandary  condition
+
+
+inelt
+outlet
+wall
+
+
+
+\item Why cannot symmetry planes (and symmetry boundary conditions always be used in 
+CFD)?
+\item Why should outlets be placed far away from the interesting flow region?
+weil am anfang am rand falsche randbedingungen sind, siehe bild silvio, slide 38
+
+
+\end{itemize}
+
+
+\section{10 Errors and uncertainty in CFD modelling}
+
+\begin{itemize}
+\item Describe three potential numerical errors in CFD
+
+\begin{itemize}
+\item Disketierungsfehler (netzt ist nicht perfekt ist wenn abgeschitten wir
+\item Rundungsfehler (flot...)
+\item Iterative Konvergenzfehler, Residien???
+\end{itemize}
+siehe buch 289
+
+\item Describe two typical physical uncertainties in CFD (uncertainties = Unsicherheiten)
+limitierte genauigkeit
+submodell ist nicht vallierdt
+siehe Buch 291
+
+\item What do the terms verification and validation mean.
+verification, mathematisch teil, ...
+validation, ingenieur, überprüfen von beschreibung der wirklichkeit entspricht
+
+
+\end{itemize}
+
+
+
+Hier eine Mustergleichung... :-) von PartDiff :-)
+\[
+\frac{\partial^3 u}{\partial x^3}-\frac{\partial u}{\partial y}=0
+\]
+
+
+
+
+\end{document}
+
+
+
+
