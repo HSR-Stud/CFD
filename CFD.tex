@@ -41,9 +41,9 @@
  \smallskip \noindent\rule{\textwidth}{0.5pt}
 \smallskip%]
 
-\section{2 Conservation laws of fluid motion and boundary conditions}
-\begin{itemize}
-\item Explain the physical meaning of the different terms in the conservation
+\section{Conservation laws of fluid motion and boundary conditions}
+\subsection{Conservation Euqations}
+Explain the physical meaning of the different terms in the conservation
 equations (link between mathematical “operations” and physical behaviour)
 
 Präsentation Folie 7
@@ -53,20 +53,58 @@ Impulsgleichung
 
 Energiebilanz
 
-Massenbilanz
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline Continuity & $\frac{\partial(\rho)}{\partial t}+\operatorname{div}(\rho
+\vec u)=0$
+\\
+\hline x-Momentum & $\frac{\partial(\rho u)}{\partial
+t}+\operatorname{div}(\rho u \vec u) = - \frac{\partial p}{\partial
+x}+\operatorname{div}(\mu \operatorname{grad} u)+S_{Mx}$ \\
+\hline y-Momentum & $\frac{\partial(\rho v)}{\partial
+t}+\operatorname{div}(\rho v \vec u) = - \frac{\partial p}{\partial
+y}+\operatorname{div}(\mu \operatorname{grad} v)+S_{My}$ \\
+\hline z-Momentum & $\frac{\partial(\rho w)}{\partial
+t}+\operatorname{div}(\rho w \vec u) = - \frac{\partial p}{\partial
+z}+\operatorname{div}(\mu \operatorname{grad} w)+S_{Mz}$ \\
+\hline Energy & $\frac{\partial(\rho i)}{\partial
+t}+\operatorname{div}(\rho i \vec u) = -p \operatorname{div} \vec u +
+\operatorname{div}(k \operatorname{grad} T) + \Phi + S_i$ \\
+\hline Equations of State & $p=p(\rho, T)$ und $i=i(\rho, T)$ \\
+\hline
+\end{tabular}
+\caption{Governing Equation of the flow of a compressible Newtonian fluid}
+\end{center}
+\end{table}
 
 
+\subsection{Explain the physical meaning of the different terms in a general
+transport equation}
 
-\item Explain the physical meaning of the different terms in a general transport equation
+\begin{align}
+\frac{\partial(\rho \phi)}{\partial t} + \operatorname{div}(\rho\phi\vec
+u)=\operatorname{div}(\Gamma \operatorname{grad} \phi) + S_\phi
+\end{align}
 
-dito obne
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+\hline Rate of increase of $\phi$ of fluid element +& Net rate of flow of $\phi$
+out of fluid element =& Rate of increase of $\phi$ due to diffusion +& Rate of
+increase of $\phi$ due to sources \\
+\hline
+\end{tabular}
+\caption{Meaning of general transport equation}
+\end{center}
+\end{table}
 
-\item Derive continuity and momentum equations from basic physical idea (mass conservation, Newton second law) and general transport equation with appropriate variable substitutions
+Derive continuity and momentum equations from basic physical idea (mass conservation, Newton second law) and general transport equation with appropriate variable substitutions
 Präsentation Folie 5
 
 Kontinuitätsgleichung bedeutet Qellenfrei, Erhaltend
 
-\end{itemize}
+
 
 
 
