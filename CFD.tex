@@ -112,24 +112,39 @@ Kontinuitätsgleichung bedeutet Qellenfrei, Erhaltend
 
 
 
-\section{3 Turbulence and its modelling}
-\begin{itemize}
-\item Explain the properties of turbulence and their influence on the flow field. Which changes can be observed compared to laminar flow?
+\section{Turbulence and its modelling}
 
-Fole 5
-Nichtlinear
-Zufälligkeit (nicht Reproduzeirbar)
-3D Densional, auch wenn Mittelwert in 1D und 2D variert
-hohe Wirbelstärke
-Energiewirbel disipiert (wird immer kleiner)
-intermitetci, es gibt Nicht turbulenz strömung oder nicht aber auch turbulenz fluss
-Hohe diffusitität von Impuls und Energie (gute verteilung)
-Trubulenz ist lokaer umwelt abhänig (z.B. Absatz)
+\subsection{Properties of turbulence}
+Explain the properties of turbulence and their influence on the flow
+field. Which changes can be observed compared to laminar flow?
 
-\item Explain the main approximations using RANS and LES modelling, including assumptions (what is computed and how, what is modelled and how)
+\textbf{Turbulence is irregular, disorderly, non-stationary, three-dimensional,
+highly non-linear, irreversible phenomenon}
 
-Reynolds- Averaged Navier-Stokes Equations (RANS)\\
-Geschwindikeit und Druck wir in einen gemittelten und einen fluchtuierenden Anteil getrennt
+\begin{itemize} 
+\item Nichtlinear
+\item Zufälligkeit (nicht Reproduzierbar)
+\item 3D, auch wenn Mittelwert in 1D und 2D variert
+\item hohe Wirbelstärke
+\item Energie wird dissipiert (wird immer kleiner)
+\item Intermittency: Turbulenz kann nur in Teilen der Strömung vorhanden sein.
+$\Rightarrow$ Eine Strömung kann nicht nur aus turbulenten Anteilen bestehen.
+\item Hohe Diffusivität von Impuls und Energie (Gute Verteilung)
+\item Turbulenz ist lokaler Umgebung abhängig (z.B. Absatz)
+\end{itemize}
+\subsection{RANS and LES Modelling}
+Explain the main approximations using RANS
+and LES modelling, including assumptions (what is computed and how, what is modelled and how)
+\subsubsection{RANS}
+\textbf{Reynolds-averaged Navier–Stokes (RANS)}
+RANS besteht aus einem Mittelwert der Strömungskennwärte und einem stochastisch
+fluktuierenden Anteil. Vor der numerischen Berechnung der Lösung liegen die
+Navier-Stokes Gleichungen als zeitgemittelt vor. Extraterme liegen in den RANS
+aufgrund der Interaktionen der verschiedenen turbulenten Fluktuaktionen vor.
+Diese werden normalerweise mit klassischen Turbulenzmodellen wie dem
+$k-\epsilon$- oder dem Reynoldsstress-Modell modelliert.
+
+Vorteil: erträgliche Rechenleistung, deshalb die meistverwendte Methode.
 %u=u_strich + u'
 %p=p_strich + p'
 Diese Teile zustälich zu Impulsgleichung
