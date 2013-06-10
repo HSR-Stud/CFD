@@ -165,7 +165,9 @@ Elemente werden über sogenannte Subgrid-Scale Models approximiert. \\
 \subsection{Wallfunctions} 
 Im Engineeringbereich interessieren die Details der Near-Wall Region im
 Normalfall nicht. Von Interesse ist hingegen der Strömungswiderstand in der Nähe
-der Wände. Wallfunktionen korrigieren die \colorbox{red}{bla bla bla}s
+der Wände. Wallfunktionen korrigieren die
+
+ \colorbox{red}{Bitte ergänzen!}
 
 What are wall functions, idea behind them, advantages
 and disadvantages tabelle funktion
@@ -180,22 +182,69 @@ dimensionlose Kennzahl der Abstand der ersten Zelle am Rand, siehe Bild Silvio
 
 
 \subsection{FV Discretisation for a one-dimensional heat conduction Problem}
+\subsubsection{Problemstellung}
 Derive a finite-volume discretization for a one-dimensional heat conduction
 problem. 
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[scale=1]{images/41.pdf}
-\caption{One-Dimensional Heat Conduction}
-\label{fig:Kreisel}
+\caption{One-Dimensional Heat Conduction Problem}
+\label{fig:41}
 \end{center}
 \end{figure}
+Zur Diskretisierung wird das Gebiet in Kontrollvolumen geteilt. Bei diesem
+Problem werden die Kontrollpunkte gleich zwischen den Randpunkten A und B
+verteilt.
+
  Dieses Problem ist Steady-State und besteht nur aus dem Diffusionsterm der
  generellen Transportgleichung:
  
  \begin{align}
  \frac{d}{dx} \left( \Gamma \frac{d\phi}{dx}\right) + S = 0
  \end{align}
+
+\subsubsection{Diskretisierung}
+
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=1.2]{images/42.pdf}
+\caption{One-Dimensional Heat Conduction Diskretisierung}
+\label{fig:42}
+\end{center}
+\end{figure}
+
+Generell wird jeweils ein Punkt P wie in Abbildung \ref{fig:42} gezeigt
+betrachtet. Rechts davon befindet sich ein weitere Kontrollpunkt genannt E für
+East. Analog dazu befindet sich links der Punkt W. Klein e und klein w sind die
+Kopfflächen des Kontrollvolumen dar. Die verschiedenen Abstände sind jeweils mit
+einen $\delta$ bezeichnet.
+
+Der wichtigste Schritt der FVM ist die Integration der das Problem
+beschreibenden Formel. Dies geschieht für den Punkt P folgendermassen:
+
+\begin{align}
+\int_{\Delta V} \frac{d}{dx} \left( \Gamma \frac{d\phi}{dx}\right)dV +
+\int_{\Delta V}SdV = \left(\Gamma A
+\frac{d\phi}{dx}\right)_{e}-\left(\Gamma A \frac{d\phi}{dx}\right)_w +
+\bar{S}\Delta V = 0
+\end{align}
+A ist in dieser Formel die Querschnittsfläche des Kontrollvolumens und $\bar{S}$
+der Quellenwert des betrachteten Kontrollvolumen. Ein Vorteil dieser Methode ist
+die klare physikalische Bedeutung: Der diffusive Fluss von $\phi$ der das
+Kontrollvolumen auf der Ostseite verlässt minus der diffusive Fluss von $\phi$
+der in das Kontrollvolumen auf der Westseite gelangt ist gleich der Quelle von
+$\phi$ im Kontrollvolumen.
+
+Die Werte von $\Gamma$ werden linear zwischen den beiden Punkten E und W
+approximiert.
+
+\begin{align}
+\Gamma_w=\frac{\Gamma_W+\Gamma_P}{2} \\
+\Gamma_e=\frac{\Gamma_P+\Gamma_E}{2}
+\end{align}
+
 
 \begin{itemize}
 \item Derive a finite-volume discretization for a one-dimensional heat conduction problem. 
