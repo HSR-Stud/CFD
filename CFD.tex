@@ -186,11 +186,16 @@ problem.
 \begin{figure}[h]
 \begin{center}
 \includegraphics[scale=1]{images/41.pdf}
-\caption{One-Dimenstional Heat Conduction}
+\caption{One-Dimensional Heat Conduction}
 \label{fig:Kreisel}
 \end{center}
 \end{figure}
-
+ Dieses Problem ist Steady-State und besteht nur aus dem Diffusionsterm der
+ generellen Transportgleichung:
+ 
+ \begin{align}
+ \frac{d}{dx} \left( \Gamma \frac{d\phi}{dx}\right) + S = 0
+ \end{align}
 
 \begin{itemize}
 \item Derive a finite-volume discretization for a one-dimensional heat conduction problem. 
