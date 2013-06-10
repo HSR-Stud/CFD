@@ -237,20 +237,53 @@ Kontrollvolumen auf der Ostseite verlässt minus der diffusive Fluss von $\phi$
 der in das Kontrollvolumen auf der Westseite gelangt ist gleich der Quelle von
 $\phi$ im Kontrollvolumen.
 
-Die Werte von $\Gamma$ werden linear zwischen den beiden Punkten E und W
-approximiert.
+Die Werte von $\Gamma$ an den Stirnflächen e und w werden linear zwischen den
+beiden Punkten E und W approximiert:
 
 \begin{align}
 \Gamma_w=\frac{\Gamma_W+\Gamma_P}{2} \\
 \Gamma_e=\frac{\Gamma_P+\Gamma_E}{2}
 \end{align}
 
+Die Ableitungen $\phi$ werden ebenfalls linear über die Distanz $\delta x_{PE}$
+und $\delta x_{WP}$ zwischen P und e bzw. w interpoliert.
 
+\begin{align}
+\left(\Gamma A \frac{d\phi}{dx}\right)_e = \Gamma_e A_e
+\left(\frac{\phi_E - \phi_P}{\delta x_{PE}}\right)
+\end{align}
+\begin{align}
+\left(\Gamma A \frac{d\phi}{dx}\right)_w = \Gamma_w A_w
+\left(\frac{\phi_P - \phi_W}{\delta x_{WP}}\right)
+\end{align}
+
+Der Quellterm wird meistens als Funktion der abhängigen Variable dargestellt:
+
+\begin{align}
+\bar{S}\Delta V = S_u+S_p\phi_P
+\end{align}
+
+
+Gesamthaft ergibt sich folgende Formel für das betrachtete Kontrollvolumen:
+
+\begin{align}
+\Gamma_e A_e \left(\frac{\phi_E-\phi_P}{\delta x_{PE}}\right)-\Gamma_w A_w
+\left(\frac{\phi_P-\phi_W}{\delta x_{WP}}\right)+(S_u+S_p\phi_P)=0
+\end{align}
+
+oder nach Umstellung:
+\begin{align}
+\boxed{\left(\frac{\Gamma_e}{\delta x_{PE}}A_e + \frac{\Gamma_e}{\delta
+x_{WP}} A_w -S_p\right)\phi_P=\left(\frac{\Gamma_w}{\delta x_{WP}}A_w\right)
+\phi_W + \left(\frac{\Gamma_e}{\delta x_{PE}}A_e\right)\phi_E+S_u}
+\end{align}
+
+In Koeffizientenschreibweise:
+
+\begin{align}
+\boxed{a_P\phi_P=a_W\phi_W+a_E\phi_E+S_u}
+\end{align}
 \begin{itemize}
-\item Derive a finite-volume discretization for a one-dimensional heat conduction problem. 
-
-mit Unterlagen... Folie 14
-
 \item Demonstrate, using Taylor series expansion, that the central differencing scheme has second order accuracy.
 
 Folie 11, siehe auch Multiphysik
