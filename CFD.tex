@@ -11,6 +11,9 @@
 \usepackage{paralist}
 \usepackage[pdftex]{graphicx}
 \usepackage{fancyhdr}
+\usepackage{color}
+
+
 
 %\usepackage[ansinew]{inputenc}
 %\usepackage[T1]{fontenc}
@@ -22,6 +25,7 @@
 \usepackage[a4paper]{geometry}
 \geometry{verbose,tmargin=1.5cm,lmargin=2cm,rmargin=2cm,bmargin=2cm,nohead}
 \usepackage[ngerman]{babel}
+\setlength{\parindent}{0cm}
 
 
 \begin{document}
@@ -96,7 +100,7 @@ increase of $\phi$ due to sources \\
 \hline Zeitliche Änderung von $\phi$  +& Konvektiver Transport: Fluss von $\phi$
 mit der Strömung =& Diffusiver Transport: Transport von $\phi$ aufgrund von
 Konzentrationsunterschieden (grad). Diffusionskonstante $\Gamma$ bestimmt Menge
-+& Quellterm innnerhalb des Fluidelements \\
++& Quellterm innerhalb des Fluidelements \\
 \hline
 \end{tabular}
 \caption{Meaning of general transport equation}
@@ -137,38 +141,50 @@ Explain the main approximations using RANS
 and LES modelling, including assumptions (what is computed and how, what is modelled and how)
 \subsubsection{RANS}
 \textbf{Reynolds-averaged Navier–Stokes (RANS)}
-RANS besteht aus einem Mittelwert der Strömungskennwärte und einem stochastisch
+
+RANS besteht aus einem Mittelwert der Strömungskennwerte und einem stochastisch
 fluktuierenden Anteil. Vor der numerischen Berechnung der Lösung liegen die
-Navier-Stokes Gleichungen als zeitgemittelt vor. Extraterme liegen in den RANS
-aufgrund der Interaktionen der verschiedenen turbulenten Fluktuaktionen vor.
+Navier-Stokes Gleichungen als zeitgemittelt vor. Nichtlineare Extraterme liegen
+in den RANS aufgrund der Interaktionen der verschiedenen turbulenten Fluktuationen vor.
 Diese werden normalerweise mit klassischen Turbulenzmodellen wie dem
 $k-\epsilon$- oder dem Reynoldsstress-Modell modelliert.
+\\
+\textit{Vorteile:} erträgliche Rechenleistung bei brauchbaren Resultaten,
+deshalb die meistverwendete Methode. \\
+\vspace{0.5cm}
+\textbf{Large Eddy Simulation}
+Nur grosse Turbulenzelemente werden exakt aufgelöst. Kleinere Turbulenzelemente
+werden über Filterfunktionen herausgefiltert. Diese nicht direkt berechneten
+Elemente werden über sogenannte Subgrid-Scale Models approximiert. \\
+\vspace{0.5cm}
+\textit{Vorteile:} Bessere Resultate insbesondere bei komplexen Geometrien. \\
+\textit{Nachteile:} Grösserer Speicher- und Rechenzeitbedarf
 
-Vorteil: erträgliche Rechenleistung, deshalb die meistverwendte Methode.
-%u=u_strich + u'
-%p=p_strich + p'
-Diese Teile zustälich zu Impulsgleichung
-einer neuer Term ein symetrischer Reynoldsspannungstensor von 2ter Sturfe, da es nicht mehr linear ist sonder Multipliziert wir
-Folie 14, Trubulenze
-
-Large Eddy Simulation (LES)
-Zeitabhänige Simulation
-genaue Simulation nicht komerziell
 
 
-\item What are wall functions, idea behind them, advantages and disadvantages tabelle funktion
+\subsection{Wallfunctions} 
+Im Engineeringbereich interessieren die Details der Near-Wall Region im
+Normalfall nicht. Von Interesse ist hingegen der Strömungswiderstand in der Nähe
+der Wände. Wallfunktionen korrigieren die \colorbox{red}{bla bla bla}s
 
-grad 0
-0
+What are wall functions, idea behind them, advantages
+and disadvantages tabelle funktion
+
+
 wandfunktion bei hohen reynoldzahl vereinfacht komplexität
 dimensionlose Kennzahl der Abstand der ersten Zelle am Rand, siehe Bild Silvio
 
-\end{itemize}
 
 
-\section{4 The finite volume method for the diffusion problem}
+\section{The finite volume method for the diffusion problem}
+
+
+\subsection{FV Discretisation for a one-dimensional heat conduction Problem}
+Derive a finite-volume discretization for a one-dimensional heat conduction
+problem. 
+
+
 \begin{itemize}
-
 \item Derive a finite-volume discretization for a one-dimensional heat conduction problem. 
 
 mit Unterlagen... Folie 14
