@@ -45,6 +45,10 @@
  \smallskip \noindent\rule{\textwidth}{0.5pt}
 \smallskip%]
 
+\section{Introduction}
+In dieser Zusammenfassung werden die Fragen vom Fragekatalog beantwortet.
+
+
 \section{Conservation laws of fluid motion and boundary conditions}
 \subsection{Conservation Euqations}
 Explain the physical meaning of the different terms in the conservation
@@ -294,7 +298,7 @@ Folie 11, siehe auch Multiphysik
 
 
 
-\section{5 The finite volume method for convection-diffusion problems}
+\section{The finite volume method for convection-diffusion problems}
 \begin{itemize}
 \item Explain why the CDS (central differencing scheme) does not work for large velocities.
 Pe - Klee Zahl verhänihs zeischen Konvektion und Diffusion
@@ -344,7 +348,7 @@ Folie 19
 
 
 
-\section{6 Solution algorithms for pressure velocity coupling in steady flows}
+\section{Solution algorithms for pressure velocity coupling in steady flows}
 \begin{itemize} 
 
 \item Difference between incompressible (pressure-based) and compressible (density based) approach/codes => which equations are available for which variable
@@ -371,7 +375,7 @@ folie 20
 
 
 
-\section{7 Solution of discretized equations}
+\section{Solution of discretized equations}
 \begin{itemize}
 \item Explain why iterative methods are necessary to solve sparse linear systems.
 schneller gelöst, numerisch weniger aufwindig
@@ -399,7 +403,7 @@ dann wieder feiner...
 
 
 
-\section{8 The finite volume method for unsteady flows}
+\section{The finite volume method for unsteady flows}
 \begin{itemize}
 \item Describe the three common schemes for time discretization:
 \begin{itemize}
@@ -426,7 +430,7 @@ dann wieder feiner...
 
 
 
-\section{9 Implementation of boundary conditions}
+\section{Implementation of boundary conditions}
 \begin{itemize}
 
 \item Name 5 important boundary conditions
@@ -450,7 +454,7 @@ weil am anfang am rand falsche randbedingungen sind, siehe bild silvio, slide 38
 \end{itemize}
 
 
-\section{10 Errors and uncertainty in CFD modelling}
+\section{Errors and uncertainty in CFD modelling}
 
 \begin{itemize}
 \item Describe three potential numerical errors in CFD
@@ -468,8 +472,13 @@ submodell ist nicht vallierdt
 siehe Buch 291
 
 \item What do the terms verification and validation mean.
-verification, mathematisch teil, ...
-validation, ingenieur, überprüfen von beschreibung der wirklichkeit entspricht
+\begin{itemize}
+\item verification, mathematisch teil, richtiges lösen der Gleichungen
+\item validation, ingenieur, muss die richtigen Gleichungen finden, überprüfen und Beschreibung, so dass es der Wirklichkeit entspricht.
+\end{itemize}
+
+
+
 
 
 \end{itemize}
