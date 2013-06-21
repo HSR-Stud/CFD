@@ -116,6 +116,8 @@ Präsentation Folie 5
 
 Kontinuitätsgleichung bedeutet Qellenfrei, Erhaltend
 
+\colorbox{red}{Aus anderem CFD Buch übernehmen!!!}
+
 
 
 
@@ -133,7 +135,7 @@ highly non-linear, irreversible phenomenon}
 \item Nichtlinear
 \item Zufälligkeit (nicht Reproduzierbar)
 \item 3D, auch wenn Mittelwert in 1D und 2D variert
-\item hohe Wirbelstärke
+\item hohe Wirbelstärke $\Rightarrow$ Energie wird transportiert.
 \item Energie wird dissipiert (wird immer kleiner)
 \item Intermittency: Turbulenz kann nur in Teilen der Strömung vorhanden sein.
 $\Rightarrow$ Eine Strömung kann nicht nur aus turbulenten Anteilen bestehen.
@@ -299,15 +301,17 @@ Folie 11, siehe auch Multiphysik
 
 
 \section{The finite volume method for convection-diffusion problems}
-\begin{itemize}
-\item Explain why the CDS (central differencing scheme) does not work for large velocities.
+\subsection{CDS at large velocities}
+Explain why the CDS (central differencing scheme) does not work for large velocities.
+
 Pe - Klee Zahl verhänihs zeischen Konvektion und Diffusion
 Internet
-
-\item Define the Peclet number
+\subsection{Peclet Number}
+Define the Peclet number
 Pe - Klee Zahl verhänihs zeischen Konvektion und Diffusion
 
-\item Explain why the upwind discretization (UD) works better. Explain the disadvantages of upwind discretization.
+\subsection{UD Discretization}
+Explain why the upwind discretization (UD) works better. Explain the disadvantages of upwind discretization.
 Richtung im Wind, 
 disadvatianges:
 - es leidet von falscher numerischer
@@ -319,17 +323,19 @@ advatianges
 
 
 
-\item Explain the terms: conservativeness, boundedness, transportiveness
-nachlesen...
+\subsection{Conservativeness, Boundedness, Transportiveness} Explain the terms:
+conservativeness, boundedness, transportiveness nachlesen...
 
 
 
-\item Explain how the hybrid differencing scheme works.
+\subsection{Hybrid Differencings} Explain how the hybrid differencing scheme
+works.
 idea: kombination von upwind und central, 1 Ordnung....
 upwind: hoche PeKlee Zahen (hohe konvektion und wenig diffusion)
 centrel diffenzing: kleine PeKlee Zahlen (weil mehr diffusion)
 
-\item Explain the QUICK scheme. Advantages and disadvantages.
+\subsection{Quick Scheme} Explain the QUICK scheme. Advantages and
+disadvantages.
 optimierung von upwind, schaut noch weiter in Zukunft und gewichtet die Zukunft
 sehr negativ ist es überschwingt, dies ist total unphysikalisch
 positiv näher an der exakten lösung
@@ -337,14 +343,13 @@ positiv näher an der exakten lösung
 
 
 
-\item Describe the idea behind TVD schemes.
+\subsection{TVD Schemes} Describe the idea behind TVD schemes.
 TVD steht für Total Vaariation Diminishing,
 Ideeist die Hügel zu reduzieren
 Folie 19
 
 
 
-\end{itemize}
 
 
 
