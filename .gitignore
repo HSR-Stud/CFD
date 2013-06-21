@@ -31,3 +31,6 @@
 *.xdy
 *.tdo
 CFD.pdf
+.project
+.settings/org.eclipse.core.resources.prefs
+.texlipse
