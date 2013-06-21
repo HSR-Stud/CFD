@@ -326,15 +326,18 @@ x_{PE}+\frac{1}{6}\phi'''\left(\delta x_{PE}\right)^2\right) + \Gamma A
 \Gamma A \phi'' \frac{1}{2} \left(\delta x_{PE} + \delta x_{WP}\right)+ \Gamma A
 \phi''' \frac{1}{6} \left(\left(\delta x_{PE}\right)^2-\left(\delta \x_{WP}\right)^2\right)
 \end{align}
-
+Term erster Ordnung fliegen raus!
 \section{The finite volume method for convection-diffusion problems}
 \subsection{CDS at large velocities}
 Peclet Zahl ist Konvektiv über Diffusiveanteil. F ist konevektiver Anteil, D
 ist der diffusive Anteil.
-\subsection{Peclet Number}
-Define the Peclet number
-Pe - Klee Zahl verhänihs zeischen Konvektion und Diffusion
+\subsection{Péclet Number}
+Die Péclet Nummer ist das Verhältnis zwischen Konvektions- und
+Diffusionsanteilen:
 
+\begin{align}
+Pe=\frac{F}{D} = \frac{\rho u}{\Gamma / \delta x}
+\end{align}
 \subsection{UD Discretization}
 Explain why the upwind discretization (UD) works better. Explain the disadvantages of upwind discretization.
 Richtung im Wind, 
