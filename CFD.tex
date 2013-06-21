@@ -111,13 +111,6 @@ Konzentrationsunterschieden (grad). Diffusionskonstante $\Gamma$ bestimmt Menge
 \end{center}
 \end{table}
 
-Derive continuity and momentum equations from basic physical idea (mass conservation, Newton second law) and general transport equation with appropriate variable substitutions
-Präsentation Folie 5
-
-Kontinuitätsgleichung bedeutet Qellenfrei, Erhaltend
-
-\colorbox{red}{Aus anderem CFD Buch übernehmen!!!}
-
 
 
 
@@ -385,30 +378,34 @@ folie 20
 \section{Solution of discretized equations}
 
 
-\subsection{Iterative methods
-} Explain why iterative methods are necessary to
+\subsection{Iterative methods} 
+Explain why iterative methods are necessary to
 solve sparse linear systems.
 schneller gelöst, numerisch weniger aufwindig
 Iterative löser ...
-sparse linear system sind einfach pararellisierbar
+sparse linear system sind einfach pararellisierbar viele Nullen
 
+Rechenzeitenverglich Tabelle erstellen
 
 \subsection{Jacobi and Gauss-Seidel iterative methods}
 Describe the Jacobi and Gauss-Seidel iterative methods
 Jacobi iterative method: 
 möglichst nahe an einheitsmatix kommen
-eigenwert muss keiner 1 sein, wird dafür langsamer 
+eigenwert muss keiner 1 sein das es konvergiert, wird dafür langsamer 
+gut paararellisierbar
 
 Gauss- Seidel method: 
 nicht paararellisierbar, konvergit schneller
 
-\subsection{Multi-Grid Methods} Describe the idea behind the multi-grid method
+\subsection{Multi-Grid Methods} 
+Describe the idea behind the multi-grid method
 Anfangsbedingungne 
 Stufenweises lösen auf verschiednen netzgrüssen
 foleie 19 (Ansys arbeitet so)
 feien lösen
 grobes netzt lösen
 dann wieder feiner...
+im Buch lesen auf deutsch... seite 82
 
 \colorbox{red}{Simon}
 
@@ -479,38 +476,31 @@ slide 38
 
 Describe three potential numerical errors in CFD
 \begin{itemize}
-\item Disketierungsfehler (netzt ist nicht perfekt ist wenn abgeschitten wir
-\item Rundungsfehler (flot...)
-\item Iterative Konvergenzfehler, Residien???
+\item \textbf{Disketierungsfehler}: Netz musste unendlich fein sein, um die physikalische Effekte aufzulösen. Aus diesem Grund ist es notwendig verschiedenen Netzen und Zeitschritten eine Netzstudie durchzuführen, so Resultat dasselbe Effekte gibt
+\item \textbf{Rundungsfehler}: Bei Gleitkommazahlen können beim rechnen mit dem Computer Fehler entstehen, dies weil Teile davon beim Rechnen verloren  gehen Meist mit Float.h kann nachgeschaut werden.
+\item \textbf{Iterative}: Konvergenzfehler, wenn Residuale welche beim Lösen entstehen nicht stimmen, stimmt die Physik sicher nicht.  
 \end{itemize}
-siehe buch 289
 
 \subsection{Two typical physical uncertainties in CFD}
 Describe two typical physical uncertainties in CFD (uncertainties =
-Unsicherheiten) limitierte genauigkeit
-submodell ist nicht vallierdt
-siehe Buch 291
+Unsicherheiten)
+\begin{itemize}
+\item \textbf{limitierte Genauigkeit}
+\item \textbf{fehlen von validierten Submodellen}
+\end{itemize}
+weitere Informationen im Buch Versteeg Seite 291
 
 \subsection{Verification and Validation} 
 What do the terms verification and
 validation mean.
 \begin{itemize}
-\item verification, mathematisch teil, richtiges lösen der Gleichungen
-\item validation, ingenieur, muss die richtigen Gleichungen finden, überprüfen und Beschreibung, so dass es der Wirklichkeit entspricht.
+\item \textbf{Verification}: Aufgabe des Mathematiker, schaut das die Gleichung richtig gelöst wird.
+\item \textbf{Validation}: Aufgabe des Ingenieur, schaut das die richtige Gleichung gelöst wird, welche die Wirklichkeit beschreibt.
 \end{itemize}
 
 
 \colorbox{red}{Simon}
 
-
-
-
-
-
-Hier eine Mustergleichung... :-) von PartDiff :-)
-\[
-\frac{\partial^3 u}{\partial x^3}-\frac{\partial u}{\partial y}=0
-\]
 
 
 
