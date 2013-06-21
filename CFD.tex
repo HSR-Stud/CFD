@@ -542,39 +542,42 @@ folie 20
 \subsection{Iterative methods} 
 Explain why iterative methods are necessary to solve sparse linear systems.\\
 
-schneller gelöst, numerisch weniger aufwindig
-Iterative löser ...
-sparse linear system sind einfach pararellisierbar viele Nullen
-
-Rechenzeitenvergleich Tabelle erstellen
+Iterative Methoden sind notwendig da sie nummerisch weniger aufwendig sind zu lösen und somit auch schneller und lassen sich parallel ausrechnen. Grundschema für einen iterativen Lösungsansatz ist $ D \cdot \phi_h = D \cdot_h - (A_\phi \cdot \phi_h - Q)$, darin ist D die Matrix der Diagonalelemente von der Matrix A
 
 \subsection{Jacobi and Gauss-Seidel iterative methods}
 Describe the Jacobi and Gauss-Seidel iterative methods
 \begin{itemize}
-\item \textbf{Jacobi iterative method:} 
+\item \textbf{Jacobi iterative method:}  $ \phi ^{(k+1)}_h = D^{-1} \cdot Q - (D^{-1} \cdot A_\phi - \delta)\cdot \phi_h^{(k)}$
 
-Zu beachten ist das $\lambda$ (Eigenwert) kleiner 1 sein muss, dass es konvergiert, je kleiner desto langsamer wird es jedoch.
+Zur Berechnung der Lösung eines linearen Gleichungssystems löse man die i-te Gleichung nach der i-ten Variable auf. Die neuen Näherungswerte für die Lösung berechnet man iterative aus den alten Näherungswerten.
 
+Bemerkung: Zu beachten ist das $\lambda$ (Eigenwert) kleiner 1 sein muss, dass es konvergiert, je kleiner desto langsamer wird es jedoch.\\
 Vorteil: gut paararellisierbar, ziel ist es möglichst nahe an Einheitsmatrix zu kommen\\
-Nachteil: ...
-\item \textbf{Gauss- Seidel method}: 
+Nachteil: ...\\
+
+
+\item \textbf{Gauss- Seidel method}: $ \phi ^{(k+1)}_h = D^{-1} \cdot Q - (D^{-1} \cdot [(U\cdot A_\phi ) \cdot \phi_h^{k+1} + (L \cdot A_\phi - \delta)\cdot \phi_h^{(k)}]$
+
+Löse der Reihe nach jede Gleichung nach ihrem Diagonal-Term auf, setzt Startwerte ein, iteriere, verwende jeweils neueste Näherungswerte. Im Gegensatz zum Jacobi-Verfahren verwendet man bei der Berechnung der neuen näherungswerte alle bereits neu berechneten Näherungswerte.\\
 
 Vorteil: konvergiert schneller\\
-Nachteil: nicht parallelisierbar
+Nachteil: nicht parallelisierbar\\
 
 \end{itemize} 
 
 \subsection{Multi-Grid Methods} 
 Describe the idea behind the multi-grid method
-Anfangsbedingungne 
-Stufenweises lösen auf verschiednen netzgrüssen
-foleie 19 (Ansys arbeitet so)
-feien lösen
-grobes netzt lösen
-dann wieder feiner...
-im Buch lesen auf deutsch... seite 82
 
-\colorbox{red}{Simon}
+Die Grundidee des Multi-Grid Verfahren ist es, dass aus dem ursprünglichen Rechengitter mit einer charakteristischen Gitterweite h weitere gröbere Rechengitter mit Gitterweiten von beispielsweise 2h,4h, usw. zu erzeugt werden. 
+\\
+\includegraphics[scale=0.3]{images/multigrid1.png}
+
+Aus dem feinsten Gitter (Zellmittelpunkte offen) ergeben sich durch das Zusammenfassen von jeweils vier Kontrollvolumina die Zellen des nächst gröberen Gitters (Zellmittelpunkte schraffiert). Diese können schliesslich zum gröbsten Gitter (Zellmittelpunkte voll) zusammengefasst werden.
+\\
+Während des Iterationsprozess werden Lösungen im Wechsel auf den verschiedenen Gittern berechnet, wobei zwischen den Gittern Informationen über die jeweiligen Lösungen ausgetauscht werden.
+\\
+\includegraphics[scale=0.3]{images/multigrid2.png}
+
 
 \section{The finite volume method for unsteady flows}
 \subsection{Common Schemes} Describe the three common schemes for time
