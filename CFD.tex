@@ -151,7 +151,7 @@ and LES modelling, including assumptions (what is computed and how, what is mode
 \begin{center}
 \includegraphics[scale=1]{images/51.pdf}
 \caption{RANS Strömung}
-\label{fig:41}
+\label{fig:51}
 \end{center}
 \end{figure}
 
@@ -526,7 +526,30 @@ Beschrieben in Lektion 7, Pressure Velocity Coupling: Folie 6
 \subsection{Differences between momentum equations and general scalar transport
 equations} 
 Differences between momentum equations and general scalar transport
-equations => new aspects to be tackled ??? zu folie 11
+equations => new aspects to be tackled\\
+
+\subsubsection{Momentum equation (Impulsgleichung)}
+Momentum equation (staggered CV)\\
+$(\rho u^2 A)_P - (\rho u^2 A)_W$\\
+Geschwindigkeit wird auf dem versetzten Netz um die Zellenoberfläche
+zentriert berechnet. Der Grund liegt darin, dass der Einfluss des
+Druckes nicht korrekt die diskretisierte Impulsgleichung (Geschwindigkeit)
+repräsentiert. Darum wird das Geschwindigkeitskontrollvolumen verschoben.\\
+
+\textbf{Eigene Erklärung dafür, öbs Sinn macht kei Plan:}\\
+Zusammenhang zwischen Druck und Geschwindigkeit: $p = \frac{F}{A} = \frac{m
+\cdot g \cdot h}{A} \propto g = a = \frac{\partial v}{\partial t}$\\
+Die Ableitung der Geschwindigkeit entspricht dem Druck. Da die Ableitung als
+Differenz zweier Punkte berechnet wird, ist das Resultat zwischen den zwei
+Punkten korrekt und somit macht das verschobene Netz Sinn.
+
+\subsubsection{General scalar transport}
+General scalar transport (node CV)\\
+$(\rho u A \Phi)_e - (\rho u A \Phi)_w$\\
+Skalare variabeln: Druck, Dichte Temperatur, \ldots werden auf den gewöhnlichen
+Knotenpunkten gerechnet
+
+Beschrieben in Lektion 7, Pressure Velocity Coupling: Folie 11
 
 \subsection{SIMPLE}
 Explain the SIMPLE procedure for pressure-velocity coupling\\
@@ -565,8 +588,14 @@ Zusatzinfos:\\
   \frac{A_{I,J}}{a_{I,J}}$
   \item Druck: p
   \item Geschwindigkeitskomponenten: u, v
-  \item Index \textbf{I-1, I, I+1} für x-Richtung
-  \item Index \textbf{J-1, J, J+1} für y-Richtung
+  \item Index \textbf{I-1, I, I+1} für x-Richtung (effektive Knoten, General
+  scalar Transport)
+  \item Index \textbf{J-1, J, J+1} für y-Richtung (effektive Knoten, General
+  scalar Transport)
+  \item Index \textbf{i-1, i, i+1} für x-Richtung (versetzte Knoten,
+  Impulsgleichung)
+  \item Index \textbf{j-1, j, j+1} für y-Richtung (versetzte Knoten,
+  Impulsgleichung)
 \end{itemize}
 
 Branches von Simple:\\
@@ -583,7 +612,8 @@ Beschrieben in Lektion 7, Pressure Velocity Coupling: Folie 14
 
 
 \subsection{Relaxation Factor and Uses of it}
-Explain the role of relaxation factor. 
+Explain the role of relaxation factor. \\
+
 Flussdiagramm siehe Folie 14
  Why are they used?
 folie 20
