@@ -405,25 +405,30 @@ folie 20
 
 \section{Solution of discretized equations}
 
-
 \subsection{Iterative methods} 
-Explain why iterative methods are necessary to
-solve sparse linear systems.
+Explain why iterative methods are necessary to solve sparse linear systems.\\
+
 schneller gelöst, numerisch weniger aufwindig
 Iterative löser ...
 sparse linear system sind einfach pararellisierbar viele Nullen
 
-Rechenzeitenverglich Tabelle erstellen
+Rechenzeitenvergleich Tabelle erstellen
 
 \subsection{Jacobi and Gauss-Seidel iterative methods}
 Describe the Jacobi and Gauss-Seidel iterative methods
-Jacobi iterative method: 
-möglichst nahe an einheitsmatix kommen
-eigenwert muss keiner 1 sein das es konvergiert, wird dafür langsamer 
-gut paararellisierbar
+\begin{itemize}
+\item \textbf{Jacobi iterative method:} 
 
-Gauss- Seidel method: 
-nicht paararellisierbar, konvergit schneller
+Zu beachten ist das $\lambda$ (Eigenwert) kleiner 1 sein muss, dass es konvergiert, je kleiner desto langsamer wird es jedoch.
+
+Vorteil: gut paararellisierbar, ziel ist es möglichst nahe an Einheitsmatrix zu kommen\\
+Nachteil: ...
+\item \textbf{Gauss- Seidel method}: 
+
+Vorteil: konvergiert schneller\\
+Nachteil: nicht parallelisierbar
+
+\end{itemize} 
 
 \subsection{Multi-Grid Methods} 
 Describe the idea behind the multi-grid method
@@ -527,13 +532,6 @@ validation mean.
 \item \textbf{Verification}: Aufgabe des Mathematiker, schaut das die Gleichung richtig gelöst wird.
 \item \textbf{Validation}: Aufgabe des Ingenieur, schaut das die richtige Gleichung gelöst wird, welche die Wirklichkeit beschreibt.
 \end{itemize}
-
-
-\colorbox{red}{Simon}
-
-
-
-
 
 \end{document}
 
