@@ -612,13 +612,14 @@ Beschrieben in Lektion 7, Pressure Velocity Coupling: Folie 14
 
 
 \subsection{Relaxation Factor and Uses of it}
-Explain the role of relaxation factor. \\
+Explain the role of relaxation factor. Why are they used?\\
 
-Flussdiagramm siehe Folie 14
- Why are they used?
-folie 20
-\colorbox{red}{Bischi macht}
-
+Der Korrekturfaktor wird dazu verwendet um die Konvergenz sicherzustellen. Der
+Faktor muss zwischen 0 und 1 liegen. Bei 0 würde die Berechnete Druckkorrektur
+nicht einfliessen (funktioniert nicht). Bei 1 fliesst die Druckkorrektur voll
+ein, da wird wohl das System instabil (wie P-Regler mit zuviel P-Anteil
+(Regelungstechnik) fängt an zu Osziliieren, da er zuviel korrigiert und im
+nächsten Schritt zuviel zurückkorrigieren muss).
 
 \section{Solution of discretized equations}
 
