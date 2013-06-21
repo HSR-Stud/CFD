@@ -448,10 +448,56 @@ Folie 19
 
 \section{Solution algorithms for pressure velocity coupling in steady flows}
 \subsection{Difference between incompressible and compressible approach}
-Difference between incompressible (pressure-based) and compressible (density based) approach/codes => which equations are available for which variable
-incompressibel, dichteänderung gleich 0 und p ist konstant
-compressible, dichteänderung ...
-folen 7
+Difference between incompressible (pressure-based) and compressible (density
+based) approach/codes => which equations are available for which variable\\
+
+\subsubsection{Inkompressible Fluide (Druckbasierte Algorithmen)}
+
+\begin{itemize}
+  \item Absolute Dichte ist nicht nötig (relativ genügt)
+  \item Druck-Geschwindigkeits Koppelung mit der Kontinuitätsgleichung
+  (Transportgleichung) ist nur eine \textbf{kinematische Bedingung}
+  \item Impulsgleichung $\Rightarrow$ Druck
+  \item Kontinuitätsgleichung $\Rightarrow$ Geschwindigkeitsfeld (schwache
+  Formulierung)
+\end{itemize}
+
+Weitere Infos:
+\begin{description}
+
+  \item[1] überwiegend gekoppelte Lösungsalgorithmen!
+  \item[2] sequentielle Lösungsalgorithmen mit einer Druck-Poisson-Gleichung
+  \begin{itemize}
+  	\item Divergenz von Navier-Stokes-Gleichung: $\Delta p = -\rho \nabla \cdot
+  	[\nabla \cdot (\underline u \underline u)]$
+  \end{itemize}
+  \item[3] sequentielle Lösungsalgorithmen mit einer Druckkorrektur-Gleichung
+  (zBsp. SIMPLE)
+  \begin{itemize}
+    \item Kontinuitätsgleichung und Navier-Stokes-Gleichung
+    \item $[\nabla \cdot \underline u]_{KV} = 0$
+    \item $\rho [\nabla \cdot (\underline u \underline u)]_{KV} = - [\nabla
+    \rho]_{KV} - \eta [\Delta \underline u]_{KV}$
+  \end{itemize}
+\end{description}
+
+\subsubsection{Inkompressible und kompressible Fluide (Dichtebasierte
+Algorithmen)}
+\begin{itemize}
+  \item Kontinuitätsgleichung für Dichte (Transportgleichung)
+  \item Energiegleichung für Temperatur
+  \item Als letztes wird der Druck $p$ aus $\rho$ und $T$ bestummen,
+  Zustandsgleichung für Druck $P \cdot V = n \cdot R \cdot T$
+\end{itemize}
+
+Weitere Infos:\\
+\begin{itemize}
+  \item Werden fast ausschliesslich für kompressible Fluide verwendet.\\
+  \item Können gekoppelt (eher für kompressible, da stark gekoppelt) oder
+  sequentiel (eher für inkompressible, da schwach gekoppelt) gelöst werden
+\end{itemize}
+
+Beschrieben in Lektion 7, Pressure Velocity Coupling: Folie 6
 
 
 \subsection{Differences between momentum equations and general scalar transport
@@ -496,6 +542,8 @@ Zusatzinfos:\\
   \frac{A_{I,J}}{a_{I,J}}$
   \item Druck: p
   \item Geschwindigkeitskomponenten: u, v
+  \item Index \textbf{I-1, I, I+1} für x-Richtung
+  \item Index \textbf{J-1, J, J+1} für y-Richtung
 \end{itemize}
 
 Branches von Simple:\\
