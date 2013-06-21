@@ -692,19 +692,20 @@ simulation?
 
 \section{Implementation of boundary conditions}
 
-
 \subsection{5 important boundary conditions}
+Name 5 important boundary\\
 
- Name 5 important boundary
-conditions Dirichlet boundary conditions
-Neumann boundary conditions
-Robin bandary  condition
-
-
-inelt
-outlet
-wall
-
+\begin{itemize}
+  \item inlet (Einlass)
+  \item outlet (Auslass)
+  \item Wall (Wand)
+  \item Symmetrie: kei Fluss über dend Rand, Implementation: Geschwindigkeit =
+  0, alle anderen Properties werden ausserhalb = innerhalb gesetzt
+  \item periodicity (\colorbox{red}{alternativ opening Simon?}) (or cyclic
+  boundary condition): spielt mal Einlass und wieder Auslass, Beispiel zylindrischer
+  Ofen, Kraftstoff läuft durch gleiche Fläche rein und wieder raus, abhängig
+  Position (Drehung).
+\end{itemize}
 
 
 \subsection{Why cannot symmetry planes (and symmetry boundary conditions always
