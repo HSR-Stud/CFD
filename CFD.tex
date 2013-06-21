@@ -375,7 +375,7 @@ Wiggles) und Transportiveness (Richtung des Flusses) werden erfüllt. \\
 \textit{Nachteile}: Numerische Accuracy (Das Schema basiert auf der
 Backward Differencing Formel. Die Genauigkeit ist also nur erste Ordnung.) Wenn
 der Fluss nicht synchron mit dem Netz verläuft, produziert das Schema
-diffusionsartige Fehler. In Bild \ref{fig:54} ist eine solche Prblemstellung
+diffusionsartige Fehler. In Bild \ref{fig:54} ist eine solche Problemstellung
 abgebildet. In Abbildung \ref{fig:53} die berechneten Resultate.
 
 \begin{figure}[h!]
@@ -395,8 +395,19 @@ abgebildet. In Abbildung \ref{fig:53} die berechneten Resultate.
 \end{figure}
 
 
-\subsection{Conservativeness, Boundedness, Transportiveness} Explain the terms:
-conservativeness, boundedness, transportiveness nachlesen...
+\subsection{Conservativeness, Boundedness, Transportiveness}
+\begin{itemize}
+  \item \textbf{Conservativeness}: Die Flüsse über die Flächen der Zellen
+  müssen diesselben sein, also rechts und links: Der ganze Fluss der eine Zelle
+  verlässt muss in eine neue Zelle eintreten.
+  \item \textbf{Boundedness}: 
+  \begin{itemize}
+    \item Matrizen sollten diagonaldominant sein.$\Rightarrow$ Versteeg S.143
+    \item Die Lösung sollte zwischen den gegebenen Randwerten liegen. Also wenn
+    T(0)=100K und T(10)=200K gilt, sollen alle Lösungen dazwischen liegen.
+    \item Alle Koeffizienten der Diskretisierung sollten positiv sein.
+	\end{itemize}
+\end{itemize}
 
 
 
