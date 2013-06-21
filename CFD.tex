@@ -51,7 +51,7 @@ In dieser Zusammenfassung werden die Fragen vom Fragekatalog beantwortet.
 
 
 \section{Conservation laws of fluid motion and boundary conditions}
-\subsection{Conservation Euqations}
+\subsection{Conservation Equations}
 Explain the physical meaning of the different terms in the conservation
 equations (link between mathematical “operations” and physical behaviour)
 
@@ -407,8 +407,19 @@ abgebildet. In Abbildung \ref{fig:53} die berechneten Resultate.
     T(0)=100K und T(10)=200K gilt, sollen alle Lösungen dazwischen liegen.
     \item Alle Koeffizienten der Diskretisierung sollten positiv sein.
 	\end{itemize}
+   \item \textbf{Transportiveness}: Für hohe Péclet-Zahlen können die
+   Informationen für $\phi$ ausschliesslich vom upstream kommen. $\Rightarrow$
+   Bild 54. Es ist wichtig diese Eigenschaft der betreffenden Diskretisierung zu
+   kennen.
 \end{itemize}
 
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=1.0]{images/55.pdf}
+\caption{Transportivness, a) Péclet$\to$0 b) Péclet$\to \infty$}
+\label{fig:55}
+\end{center}
+\end{figure}
 
 
 \subsection{Hybrid Differencings} Explain how the hybrid differencing scheme
