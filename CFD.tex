@@ -415,11 +415,14 @@ dann wieder feiner...
 \section{The finite volume method for unsteady flows}
 \subsection{Common Schemes} Describe the three common schemes for time
 discretization:
+
+Einehitskreis 
 \begin{itemize}
 \item Explicit (forward Euler)
 ...
 
-\item Cranck-Nicholson
+\item Cranck-Nicholson $\Rightarrow$ CDS
+Könnte Schwingen
 ...
 
 \item Implicit (backward Euler)
@@ -429,14 +432,13 @@ discretization:
 \subsection{Advantages and disadvantages of the different schemes}
 \begin{itemize}
 \item Explicit (forward Euler)
-...
+Schnell
 
 \item Cranck-Nicholson
-...
+Instabil, aber genau
 
 \item Implicit (backward Euler)
-...
-
+Robust 
 \end{itemize}
 \subsection{SIMPLE scheme}
 How does the SIMPLE scheme have to be modified for a transient
