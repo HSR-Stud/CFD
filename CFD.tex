@@ -21,7 +21,7 @@ $\blacksquare \dagger$ \end{flushright}}
 
 \usepackage[utf8]{inputenc}
 %\usepackage[latin1]{inputenc}  
-%\usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc}
 %\usepackage{lmodern}          
 \usepackage[a4paper]{geometry}
 \geometry{verbose,tmargin=1.5cm,lmargin=2cm,rmargin=2cm,bmargin=2cm,nohead}
@@ -332,8 +332,9 @@ x_{PE}+\frac{1}{6}\phi'''\left(\delta x_{PE}\right)^2\right) + \Gamma A
 Term erster Ordnung fliegen raus!
 \section{The finite volume method for convection-diffusion problems}
 \subsection{CDS at large velocities}
-Peclet Zahl ist Konvektiv über Diffusiveanteil. F ist konevektiver Anteil, D
-ist der diffusive Anteil.
+CDS ist unbrauchbar sobald dir Péclet Zahl > 2 ist. Ist dies der Fall wird der
+Koeffizient $a_e$ negativ. Dies verletzt die Voraussetzung Boundedness und kann
+zu physikalisch unmöglichen Lösungen führen. Versteeg S.145
 \subsection{Péclet Number}
 Die Péclet Nummer ist das Verhältnis zwischen Konvektions- und
 Diffusionsanteilen:
