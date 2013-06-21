@@ -349,20 +349,50 @@ Explain why the upwind discretization (UD) works better. Explain the disadvantag
 \begin{center}
 \includegraphics[scale=1.2]{images/52.pdf}
 \caption{Upwind Differencing Scheme, in positive Direction (w)}
-\label{fig:42}
+\label{fig:52}
+\end{center}
+\end{figure}
+Bei der UDS-Interpolation wird der unbekannte Wert $\phi_f$ durch den bekannten
+Wert von $\phi$ im nächsten stromauf gelegenen Zentralknoten ersetzt.
+Es gilt also:
+
+\begin{align}
+\phi_w = \phi_W \\
+\phi_e = \phi_P
+\end{align}
+
+Die diskretisierte Formel wird deshalb zu:
+
+\begin{align}
+\boxed{F_e \phi_P-F_w \phi_W = D_e(\phi_E - \phi_P) - D_w(\phi_P - \phi_W)}
+\end{align}
+
+Analog dazu lässt sich die Formel herleiten, wenn der Fluss in negative
+U-Richtung verläuft. $\Rightarrow$ Versteeg S. 146
+
+\textit{Vorteile}: Die Eigenschaften Conservativeness , Boundedness (keine
+Wiggles) und Transportiveness (Richtung des Flusses) werden erfüllt. \\
+\textit{Nachteile}: Numerische Accuracy (Das Schema basiert auf der
+Backward Differencing Formel. Die Genauigkeit ist also nur erste Ordnung.) Wenn
+der Fluss nicht synchron mit dem Netz verläuft, produziert das Schema
+diffusionsartige Fehler. In Bild \ref{fig:54} ist eine solche Prblemstellung
+abgebildet. In Abbildung \ref{fig:53} die berechneten Resultate.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=1.0]{images/54.pdf}
+\caption{UDS Problemstellung, nicht an das Grid angepasster Fluss}
+\label{fig:54}
 \end{center}
 \end{figure}
 
-
-Richtung im Wind, 
-disadvatianges:
-- es leidet von falscher numerischer
-- ist nur 1 ordungng und eshalb eher ungenau
-advatianges
-- grosse Zeitschritte
-- schlechteres netz
-- 
-
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=1.0]{images/53.pdf}
+\caption{UDS Problemstellung, nicht an das Grid angepasster Fluss}
+\label{fig:53}
+\end{center}
+\end{figure}
 
 
 \subsection{Conservativeness, Boundedness, Transportiveness} Explain the terms:
