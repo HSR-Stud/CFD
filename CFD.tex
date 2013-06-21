@@ -301,15 +301,38 @@ In Koeffizientenschreibweise:
 \end{align}
 
 \qed
-\begin{itemize}
-\item Demonstrate, using Taylor series expansion, that the central differencing scheme has second order accuracy.
+\subsection{Taylor CDS Second Order}
+Demonstrate, using Taylor series expansion, that the central differencing scheme
+has second order accuracy.\\
+\textbf{Taylorentwicklung von $\mathbf{\phi}$} \\
 
-\colorbox{red}{Folie 11, siehe auch Multiphysik}
+\begin{align}
+\boxed{\phi_E=\phi_P+\phi'\delta x_{PE} + \frac{1}{2}\phi''\left(\delta
+x_{PE}\right)^2+\frac{1}{6}\phi'''\left(\delta x_{PE}\right)^3\ldots}
+\end{align}
 
+\begin{align}
+\boxed{\phi_W=\phi_P-\phi'\delta x_{WP} + \frac{1}{2}\phi''\left(\delta
+x_{WP}\right)^2-\frac{1}{6}\phi'''\left(\delta x_{WP}\right)^3\ldots}
+\end{align}
 
-\end{itemize}
+\begin{align}
+\Gamma_e A_e \left(\frac{\phi_E-\phi_P}{\delta x_{PE}}\right)-\Gamma_w A_w
+\left(\frac{\phi_P-\phi_E}{\delta x_{WP}}\right)
+\end{align}
 
+\begin{align}
+\Gamma A \left(\phi' + \frac{1}{2} \phi''\delta
+x_{PE}+\frac{1}{6}\phi'''\left(\delta x_{PE}\right)^2\right) + \Gamma A
+\left(-\phi'+\frac{1}{2}\phi''\delta x_{WP} - \frac{1}{6} \phi'''
+\left(\delta x_{WP}\right)^2\right)
+\end{align}
 
+\begin{align}
+\boxed{\Gamma A \phi'' \frac{1}{2} \left(\delta x_{PE} + \delta
+x_{WP}\right)+\Gamma A \phi''' \frac{1}{6}\left[\left(\delta
+x_{PE}\right)^2-\left(\delta \x_{WP}\right)^2\right]}
+\end{align}
 
 
 \section{The finite volume method for convection-diffusion problems}
