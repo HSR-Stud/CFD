@@ -422,20 +422,37 @@ abgebildet. In Abbildung \ref{fig:53} die berechneten Resultate.
 \end{figure}
 
 
-\subsection{Hybrid Differencings} Explain how the hybrid differencing scheme
-works.
-idea: kombination von upwind und central, 1 Ordnung....
-upwind: hoche PeKlee Zahen (hohe konvektion und wenig diffusion)
-centrel diffenzing: kleine PeKlee Zahlen (weil mehr diffusion)
+\subsection{Hybrid Differencing Scheme} 
+Explain how the hybrid differencing scheme works.
+
+Das Hybrid Differencing Scheme kombiniert die Methoden Upwind und Central
+Differencing. Für Zellen mit \textit{niedriger} Péclet Nummer wird das
+\textbf{Central Differencing} angewendet. Zellen mit \textit{hoher} Péclet Zahl
+werden mit Hilfe des \textbf{Upwind Differencing} Verfahren berechnet.\\
+\textit{Vorteile}: Sehr robust, Einfach zu implementieren\\
+Widely Used!
 
 \subsection{Quick Scheme} Explain the QUICK scheme. Advantages and
 disadvantages.
-optimierung von upwind, schaut noch weiter in Zukunft und gewichtet die Zukunft
-sehr negativ ist es überschwingt, dies ist total unphysikalisch
-positiv näher an der exakten lösung
+Das QUICK (Quadratic Upwind Differencing Scheme) funktioniert wie der Name sagt
+als Upwind Schema, es wird aber ein weiterer Knoten im Upwind Bereich
+zur Berechnung hinzugezogen. In Abbildung \ref{fig:56} ist dies schematisch
+dargestellt. Die Diskretisierung erfolgt damit gemäss:
 
+\begin{align}
+\boxed{a_p\phi_p=a_w\phi_w+a_e\phi_e+a_{ww}\phi_{ww}+a_{ee}\phi_{ee}}
+\end{align}
 
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=1.0]{images/56.pdf}
+\caption{Quick Scheme}
+\label{fig:56}
+\end{center}
+\end{figure}
 
+\textit{Vorteile}: Zweiter Ordnung und erfüllt transportiveness. \\
+\textit{Nachteile}: Kleine unphysikalische Über- und Unterschüsse sind möglich.
 
 \subsection{TVD Schemes} Describe the idea behind TVD schemes.
 TVD steht für Total Vaariation Diminishing,
