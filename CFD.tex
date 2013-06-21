@@ -396,8 +396,57 @@ equations}
 Differences between momentum equations and general scalar transport
 equations => new aspects to be tackled ??? zu folie 11
 
-\subsection{Simple} Explain the SIMPLE procedure for pressure-velocity coupling
-siehe folie 14
+\subsection{SIMPLE}
+Explain the SIMPLE procedure for pressure-velocity coupling\\
+\newline
+SIMPLE: Semi-Implicit Method for Pressure Linked Equations\\
+Introinformationen (Wiki):\\
+Der SIMPLE-Algorithmus (Semi-implicit Method for Pressure Linked Equations) wird
+in der numerischen Strömungsmechanik zur Lösung der Navier-Stokes-Gleichungen
+bei \textbf{unbekanntem Druckfeld} eingesetzt.\\
+Die Grundidee, auf der SIMPLE basiert, ist das unbekannte Druckfeld zu schätzen,
+die Geschwindigkeitsfelder damit zu berechnen und mit Hilfe der
+Kontinuitätsgleichung eine Druckkorrektur und anschließend eine
+Geschwindigkeitskorrektur zu bestimmen. Dieses Vorgehen wird wiederholt, bis die
+Kontinuitätsgleichung im Rahmen der vorgegebenen Genauigkeit erfüllt wird.\\
+\textbf{Iterativ} (wiä endlosschleifä, aber eifach ganz andersch)\\
+
+\includegraphics[scale=0.7]{images/simple_algorithm.pdf}\\
+Kurz in Worte:\\
+\begin{itemize}
+  \item Iterationsprozess starten mit geschätzter Geschwindigkeit und Druckfeld
+  \item Konvektiver Fluss durch die Zelloberfläche wird anhand der
+  Geschwindigkeit abgeschätzt
+  \item Geschätztes Druckfeld wird für die Lösung der Impulsgleichung verwendet
+  \item Druckkorrekturgleichung, aus Kontinuitätsgleichung hergeleitet, um die
+  Durckkorrektur zu berechnen. Anhand dieser wieder die Geschwindigkeit und
+  Druckfeld berechnet wird.
+  \item Es wird solange iteriert bis die Resultate des Geschwindigkeits und
+  Druckfeld konvergieren (genügend genau sind)
+\end{itemize}
+
+Zusatzinfos:\\
+\begin{itemize}
+  \item Koeffizienten a werden durch Methoden (Central, hybrid, upwind, quick,
+  \ldots) berechnet
+  \item $d_{i,J} = \frac{A_{i,J}}{a_{i,J}}$ und $d_{I,J} =
+  \frac{A_{I,J}}{a_{I,J}}$
+  \item Druck: p
+  \item Geschwindigkeitskomponenten: u, v
+\end{itemize}
+
+Branches von Simple:\\
+\begin{itemize}
+  \item SIMPLER (R for revised, Patankar, 1980): In this algorithm the
+  continuity equation is used to derive a pressure instead of a pressure correction equation as in SIMPLE. The intermediate pressure field is obtained directly without the use of a correction. Velocities are, however, still obtained through the velocity corrections as in SIMPLE
+  \item SIMPLEC (C for consistent, van Doormal-Raithby, 1984): this algorithm
+  follows the same steps as the SIMPLE algorithm, but the momentum equations are manipulated so that the SIMPLEC velocity correction equations omit terms that are less significant than those in SIMPLE
+  \item PISO (Pressure Implicit with Splitting of Operators, Issa, 1986): is a
+  p–v calculation procedure developed originally for non-iterative computation of unsteady compressible flows. It has been adapted successfully for the iterative solution of steady state problems. PISO involves one predictor step and two corrector steps and may be seen as an extension of SIMPLE, with a further corrector step to enhance it
+\end{itemize}
+
+Beschrieben in Lektion 7, Pressure Velocity Coupling: Folie 14
+
 
 \subsection{Relaxation Factor and Uses of it}
 Explain the role of relaxation factor. 
