@@ -178,6 +178,9 @@ Elemente werden über sogenannte Subgrid-Scale Models approximiert. \\
 
 
 \subsection{Wallfunctions} 
+What are wall functions, idea behind them, advantages
+and disadvantages.
+
 Im Engineeringbereich interessieren die Details der Near-Wall Region im
 Normalfall nicht. Von Interesse ist hingegen der Strömungswiderstand in der Nähe
 der Wände. Wallfunktionen korrigieren die
@@ -185,14 +188,7 @@ der Wände. Wallfunktionen korrigieren die
 Gleiche Anzahl Knoten, Strömung muss nicht über allzu feines Netz approximiert
 werden. $\Rightarrow$ Spart Rechenleistung bei akkuraten Resultaten.
 
- \colorbox{red}{Bitte ergänzen Silvio von letztes Jahr!}
-
-What are wall functions, idea behind them, advantages
-and disadvantages tabelle funktion
-
-
-wandfunktion bei hohen reynoldzahl vereinfacht komplexität
-dimensionlose Kennzahl der Abstand der ersten Zelle am Rand, siehe Bild Silvio
+ \colorbox{red}{Bitte ergänzen Bischi von letztes Jahr!}
 
 
 
@@ -304,7 +300,7 @@ In Koeffizientenschreibweise:
 \begin{itemize}
 \item Demonstrate, using Taylor series expansion, that the central differencing scheme has second order accuracy.
 
-Folie 11, siehe auch Multiphysik
+\colorbox{red}{Folie 11, siehe auch Multiphysik}
 
 
 \end{itemize}
@@ -314,10 +310,8 @@ Folie 11, siehe auch Multiphysik
 
 \section{The finite volume method for convection-diffusion problems}
 \subsection{CDS at large velocities}
-Explain why the CDS (central differencing scheme) does not work for large velocities.
-
-Pe - Klee Zahl verhänihs zeischen Konvektion und Diffusion
-Internet
+Peclet Zahl ist Konvektiv über Diffusiveanteil. F ist konevektiver Anteil, D
+ist der diffusive Anteil.
 \subsection{Peclet Number}
 Define the Peclet number
 Pe - Klee Zahl verhänihs zeischen Konvektion und Diffusion
@@ -361,46 +355,46 @@ Ideeist die Hügel zu reduzieren
 Folie 19
 
 
-
-
+\colorbox{red}{Domi macht}
 
 
 \section{Solution algorithms for pressure velocity coupling in steady flows}
-\begin{itemize} 
-
-\item Difference between incompressible (pressure-based) and compressible (density based) approach/codes => which equations are available for which variable
+\subsection{Difference between incompressible and compressible approach}
+Difference between incompressible (pressure-based) and compressible (density based) approach/codes => which equations are available for which variable
 incompressibel, dichteänderung gleich 0 und p ist konstant
 compressible, dichteänderung ...
 folen 7
 
 
-\item Differences between momentum equations and general scalar transport equations => new aspects to be tackled
-??? zu folie 11
+\subsection{Differences between momentum equations and general scalar transport
+equations} 
+Differences between momentum equations and general scalar transport
+equations => new aspects to be tackled ??? zu folie 11
 
-\item Explain the SIMPLE procedure for pressure-velocity coupling
+\subsection{Simple} Explain the SIMPLE procedure for pressure-velocity coupling
 siehe folie 14
 
-\item Explain the role of relaxation factor. 
+\subsection{Relaxation Factor and Uses of it}
+Explain the role of relaxation factor. 
 Flussdiagramm siehe Folie 14
-
-
-\item Why are they used?
+ Why are they used?
 folie 20
-
-
-\end{itemize}
-
+\colorbox{red}{Bischi macht}
 
 
 \section{Solution of discretized equations}
-\begin{itemize}
-\item Explain why iterative methods are necessary to solve sparse linear systems.
+
+
+\subsection{Iterative methods
+} Explain why iterative methods are necessary to
+solve sparse linear systems.
 schneller gelöst, numerisch weniger aufwindig
 Iterative löser ...
 sparse linear system sind einfach pararellisierbar
 
 
-\item Describe the Jacobi and Gauss-Seidel iterative methods
+\subsection{Jacobi and Gauss-Seidel iterative methods}
+Describe the Jacobi and Gauss-Seidel iterative methods
 Jacobi iterative method: 
 möglichst nahe an einheitsmatix kommen
 eigenwert muss keiner 1 sein, wird dafür langsamer 
@@ -408,7 +402,7 @@ eigenwert muss keiner 1 sein, wird dafür langsamer
 Gauss- Seidel method: 
 nicht paararellisierbar, konvergit schneller
 
-\item Describe the idea behind the multi-grid method
+\subsection{Multi-Grid Methods} Describe the idea behind the multi-grid method
 Anfangsbedingungne 
 Stufenweises lösen auf verschiednen netzgrüssen
 foleie 19 (Ansys arbeitet so)
@@ -416,13 +410,11 @@ feien lösen
 grobes netzt lösen
 dann wieder feiner...
 
-\end{itemize}
-
-
+\colorbox{red}{Simon}
 
 \section{The finite volume method for unsteady flows}
-\begin{itemize}
-\item Describe the three common schemes for time discretization:
+\subsection{Common Schemes} Describe the three common schemes for time
+discretization:
 \begin{itemize}
 \item Explicit (forward Euler)
 ...
@@ -434,24 +426,32 @@ dann wieder feiner...
 ...
 
 \end{itemize}
-\item What are the advantages and disadvantages of the different schemes?
+\subsection{Advantages and disadvantages of the different schemes}
+\begin{itemize}
+\item Explicit (forward Euler)
+...
 
+\item Cranck-Nicholson
+...
 
-\item How does the SIMPLE scheme have to be modified for a transient simulation?
-
-
+\item Implicit (backward Euler)
+...
 
 \end{itemize}
+\subsection{SIMPLE scheme}
+How does the SIMPLE scheme have to be modified for a transient
+simulation?
 
-
-
+\colorbox{red}{Domi}
 
 
 \section{Implementation of boundary conditions}
-\begin{itemize}
 
-\item Name 5 important boundary conditions
-Dirichlet boundary conditions
+
+\subsection{5 important boundary conditions}
+
+ Name 5 important boundary
+conditions Dirichlet boundary conditions
 Neumann boundary conditions
 Robin bandary  condition
 
@@ -462,20 +462,22 @@ wall
 
 
 
-\item Why cannot symmetry planes (and symmetry boundary conditions always be used in 
-CFD)?
-\item Why should outlets be placed far away from the interesting flow region?
-weil am anfang am rand falsche randbedingungen sind, siehe bild silvio, slide 38
+\subsection{Why cannot symmetry planes (and symmetry boundary conditions always
+be used in CFD)?}
+Why cannot symmetry planes (and symmetry boundary conditions always
+be used in CFD)
+\subsection{Why should outlets be placed far away from the interesting flow
+region?}
+ weil am anfang am rand falsche randbedingungen sind, siehe bild silvio,
+slide 38
 
-
-\end{itemize}
-
+\colorbox{red}{Bischi}
 
 \section{Errors and uncertainty in CFD modelling}
 
-\begin{itemize}
-\item Describe three potential numerical errors in CFD
+\subsection{3 potential numerical errors in CFD}
 
+Describe three potential numerical errors in CFD
 \begin{itemize}
 \item Disketierungsfehler (netzt ist nicht perfekt ist wenn abgeschitten wir
 \item Rundungsfehler (flot...)
@@ -483,22 +485,25 @@ weil am anfang am rand falsche randbedingungen sind, siehe bild silvio, slide 38
 \end{itemize}
 siehe buch 289
 
-\item Describe two typical physical uncertainties in CFD (uncertainties = Unsicherheiten)
-limitierte genauigkeit
+\subsection{Two typical physical uncertainties in CFD}
+Describe two typical physical uncertainties in CFD (uncertainties =
+Unsicherheiten) limitierte genauigkeit
 submodell ist nicht vallierdt
 siehe Buch 291
 
-\item What do the terms verification and validation mean.
+\subsection{Verification and Validation} 
+What do the terms verification and
+validation mean.
 \begin{itemize}
 \item verification, mathematisch teil, richtiges lösen der Gleichungen
 \item validation, ingenieur, muss die richtigen Gleichungen finden, überprüfen und Beschreibung, so dass es der Wirklichkeit entspricht.
 \end{itemize}
 
 
+\colorbox{red}{Simon}
 
 
 
-\end{itemize}
 
 
 
