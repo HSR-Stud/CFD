@@ -16,7 +16,6 @@
 \newcommand{\qed}{\begin{flushright}
 $\blacksquare \dagger$ \end{flushright}}
 
-
 %\usepackage[ansinew]{inputenc}
 %\usepackage[T1]{fontenc}
 
@@ -33,9 +32,11 @@ $\blacksquare \dagger$ \end{flushright}}
 \begin{document}
 \pagestyle{fancy}
 \setlength{\footskip}{10mm}
-\fancyhf{}
+\fancyhf{} 
+\fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0.5pt}
+
 
 %\twocolumn[
  \centerline{\LARGE \bf \textsf{MSE CFD}} 
