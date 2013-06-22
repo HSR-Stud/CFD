@@ -553,6 +553,7 @@ Knotenpunkten gerechnet
 Beschrieben in Lektion 7, Pressure Velocity Coupling: Folie 11
 
 \subsection{SIMPLE}
+\label{sec:SIMPLE}
 Explain the SIMPLE procedure for pressure-velocity coupling\\
 \newline
 SIMPLE: Semi-Implicit Method for Pressure Linked Equations\\
@@ -717,7 +718,7 @@ Verlag. Versteeg leitet es anders her und verwendet andere Variablen
 \begin{itemize}
 \item \textbf{Explicit (forward Euler)}: Effizient, Einfach zu implementieren.
 
-\item \textbf{Cranck-Nicholson}:  Basiert auf Central Differencing, deshalb 2nd
+\item \textbf{Crank-Nicholson}:  Basiert auf Central Differencing, deshalb 2nd
 Order Accuracy. Kleinere Time Step Limitation $\Rightatrrow$ sehr gute Resulate
 bei mässig kleinen Zeitschritten
 
@@ -734,7 +735,7 @@ höhere räumliche Auflösungen zu erhalten müssen die Zeitschritte im Quadrat 
 reduziert werden (Versteeg S.247). Rechenpower! Deshalb für transiente Probleme
 nicht empfohlen.
 
-\item \textbf{Cranck-Nicholson}: Ebenfalls Time Step Limit $\Rightarrow$ Weniger
+\item \textbf{Crank-Nicholson}: Ebenfalls Time Step Limit $\Rightarrow$ Weniger
 ausgeprägt. (Versteeg S.248)
 
 \item \textbf{Implicit (backward Euler)}: Verfahren erster Ordnung $\Rightarrow$
@@ -745,8 +746,25 @@ Genauigkeit zu erhalten. (Rechenpower!)
 \subsection{SIMPLE scheme}
 How does the SIMPLE scheme have to be modified for a transient
 simulation?
+ 
+Das SIMPLE Scheme muss für transiente Strömungen folgendermassen erweitert
+werden. Es muss ein zeitlich abhängiger Druckkorrekturterm hinzugefügt werden
+(Kontigleichung):
 
-\colorbox{red}{Domi}
+\begin{align}
+\frac{\partial \rho}{\partial t} + \nabla (\rho \mathbf{u}) 
+\end{align}
+
+Die führt zum Algorithmus der in Abbildung \ref{fig:82} abgebildet ist. (Siehe
+auch Kapitel \ref{sec:SIMPLE})
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=1.0]{images/82.pdf}
+\caption{Angepasster SIMPLE Algorithmus}
+\label{fig:82}
+\end{center}
+\end{figure}
 
 
 \section{Implementation of boundary conditions}
