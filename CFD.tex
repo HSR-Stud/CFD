@@ -695,7 +695,12 @@ Je nach Wahl des Paramters $\alpha$ die verschiedenen Methoden. \\
   \end{align}
 \end{itemize}
 
+In Abbildung \ref{fig:81} ist die grafische Representation von obigen
+Gleichungen abgebildet.
 
+\textbf{Herleitung aus Buch CFD-Modellierung, Rüdiger Schwaerze, Springer
+Verlag. Versteeg leitet es anders her und verwendet andere Variablen
+(Parameter Versteeg $\mathbf{\Theta = \alpha}$!)}
 
 \begin{figure}[h!]
 \begin{center}
@@ -708,15 +713,34 @@ Je nach Wahl des Paramters $\alpha$ die verschiedenen Methoden. \\
 
 
 \subsection{Advantages and disadvantages of the different schemes}
+\textbf{Advantages}:
 \begin{itemize}
-\item Explicit (forward Euler)
-Schnell
+\item \textbf{Explicit (forward Euler)}: Effizient, Einfach zu implementieren.
 
-\item Cranck-Nicholson
-Instabil, aber genau
+\item \textbf{Cranck-Nicholson}:  Basiert auf Central Differencing, deshalb 2nd
+Order Accuracy. Kleinere Time Step Limitation $\Rightatrrow$ sehr gute Resulate
+bei mässig kleinen Zeitschritten
 
-\item Implicit (backward Euler)
-Robust 
+\item \textbf{Implicit (backward Euler)}: Robust, Stabil für alle Time Step
+Grössen. Generell empfohlen für transiente Probleme.
+ 
+
+\end{itemize}
+
+\textbf{Disadvantages}:
+\begin{itemize}
+\item \textbf{Explicit (forward Euler)}: Time Step Limit $\Rightarrow$ Um eine
+höhere räumliche Auflösungen zu erhalten müssen die Zeitschritte im Quadrat dazu
+reduziert werden (Versteeg S.247). Rechenpower! Deshalb für transiente Probleme
+nicht empfohlen.
+
+\item \textbf{Cranck-Nicholson}: Ebenfalls Time Step Limit $\Rightarrow$ Weniger
+ausgeprägt. (Versteeg S.248)
+
+\item \textbf{Implicit (backward Euler)}: Verfahren erster Ordnung $\Rightarrow$
+Deshalb müssen genügend kleine Time Steps gewählt werden um eine entsprechende
+Genauigkeit zu erhalten. (Rechenpower!)
+
 \end{itemize}
 \subsection{SIMPLE scheme}
 How does the SIMPLE scheme have to be modified for a transient
