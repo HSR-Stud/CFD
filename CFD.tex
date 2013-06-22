@@ -659,20 +659,54 @@ im Buch lesen auf deutsch... seite 82
 \section{The finite volume method for unsteady flows}
 \subsection{Common Schemes} Describe the three common schemes for time
 discretization:
+Um auch instationäre, zeitabhängige Strömungen simulieren zu können, muss in
+die bisher hergeleiteten Gleichungen die Zeit integriert werden. Ausgehend von
+der einfachen Diffeq:
 
-Einehitskreis 
+\begin{align}
+\frac{d\phi}{dt}=f(t,\phi(t))
+\end{align}
+Integriert man diese Gleichung über ein Zeitintervall $\Delta_t = t_{n+1}-t_n$
+ergibt sich
+
+\begin{align}
+\phi^{n+1}=\phi^n + \int_{t_n}^{t_{n+1}} f(t,\phi(t))dt
+\end{align}
+ 
+Über eine Diskretisierung folgende Formel hergeleitet werden:
+
+\begin{align}
+\phi^{n+1}=\phi^n + \left[\alpha \cdot f(t_n,\phi^n)+(1-\alpha)\cdot
+f(t_{n+1},\phi^{n+1})\right]\Delta t
+\end{align}
+
+
+Je nach Wahl des Paramters $\alpha$ die verschiedenen Methoden. \\
 \begin{itemize}
-\item Explicit (forward Euler)
-...
-
-\item Cranck-Nicholson $\Rightarrow$ CDS
-Könnte Schwingen
-...
-
-\item Implicit (backward Euler)
-...
-
+  \item $\alpha = 1$: Explizites Euler Verfahren \begin{align}
+  \phi^{n+1}= \phi^n + f(t_n,\phi^n) \Delta t
+  \end{align}
+  \item $\alpha= 0.5$: Crank Nicholson \begin{align}
+  \phi^{n+1}=\phi^n + \frac{1}{2}
+  \left[f(t_n,\phi^n)+f(t_{n+1},\phi^{n+1})\right]\Delta t
+  \end{align}
+  \item $\alpha = 0$: Implizites Euler Verfahren \begin{align}
+  \phi^{n+1}=\phi^n + f(t_{n+1},\phi^{n+1})\Delta t
+  \end{align}
 \end{itemize}
+
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=1.0]{images/81.pdf}
+\caption{Raum-Zeit Gitter}
+\label{fig:81}
+\end{center}
+\end{figure}
+
+
+
 \subsection{Advantages and disadvantages of the different schemes}
 \begin{itemize}
 \item Explicit (forward Euler)
