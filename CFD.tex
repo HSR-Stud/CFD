@@ -343,12 +343,12 @@ x_{PE}+\frac{1}{6}\phi'''\left(\delta x_{PE}\right)^2\right) + \Gamma A
 Term erster Ordnung fliegen raus!
 \section{The finite volume method for convection-diffusion problems}
 \subsection{CDS at large velocities}
-CDS ist unbrauchbar sobald dir Péclet Zahl > 2 ist. Ist dies der Fall wird der
+CDS ist unbrauchbar sobald die Péclet Zahl > 2 ist. Ist dies der Fall, wird der
 Koeffizient $a_e$ negativ. Dies verletzt die Voraussetzung Boundedness und kann
 zu physikalisch unmöglichen Lösungen führen. Versteeg S.145
 \subsection{Péclet Number}
-Die Péclet Nummer ist das Verhältnis zwischen Konvektions- und
-Diffusionsanteilen:
+Die Péclet Nummer ist das Verhältnis zwischen Konvektions(F)- und
+Diffusionsanteilen(D):
 
 \begin{align}
 Pe=\frac{F}{D} = \frac{\rho u}{\Gamma / \delta x}
@@ -452,7 +452,7 @@ zur Berechnung hinzugezogen. In Abbildung \ref{fig:56} ist dies schematisch
 dargestellt. Die Diskretisierung erfolgt damit gemäss:
 
 \begin{align}
-\boxed{a_p\phi_p=a_w\phi_w+a_e\phi_e+a_{ww}\phi_{ww}+a_{ee}\phi_{ee}}
+\boxed{a_p\phi_p=a_w\phi_w+a_e\phi_e+a_{ww}\phi_{ww}}
 \end{align}
 
 \begin{figure}[h!]
@@ -515,7 +515,7 @@ Algorithmen)}
 \begin{itemize}
   \item Kontinuitätsgleichung für Dichte (Transportgleichung)
   \item Energiegleichung für Temperatur
-  \item Als letztes wird der Druck $p$ aus $\rho$ und $T$ bestummen,
+  \item Als letztes wird der Druck $p$ aus $\rho$ und $T$ bestimmt,
   Zustandsgleichung für Druck $P \cdot V = n \cdot R \cdot T$
 \end{itemize}
 
@@ -573,7 +573,14 @@ Geschwindigkeitskorrektur zu bestimmen. Dieses Vorgehen wird wiederholt, bis die
 Kontinuitätsgleichung im Rahmen der vorgegebenen Genauigkeit erfüllt wird.\\
 \textbf{Iterativ} (wiä endlosschleifä, aber eifach ganz andersch)\\
 
-\includegraphics[scale=0.7]{images/simple_algorithm.pdf}\\
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.7]{images/simple_algorithm.pdf}
+\caption{SIMPLE Algorithm}
+\label{fig:SIMPLE1}
+\end{center}
+\end{figure}
+%\includegraphics[scale=0.7]{images/simple_algorithm.pdf}\\
 Kurz in Worte:\\
 \begin{itemize}
   \item Iterationsprozess starten mit geschätzter Geschwindigkeit und Druckfeld
@@ -633,23 +640,36 @@ nächsten Schritt zuviel zurückkorrigieren muss).
 \subsection{Iterative methods} 
 Explain why iterative methods are necessary to solve sparse linear systems.\\
 
-Iterative Methoden sind notwendig da sie nummerisch weniger aufwendig sind zu lösen und somit auch schneller und lassen sich parallel ausrechnen. Grundschema für einen iterativen Lösungsansatz ist $ D \cdot \phi_h = D \cdot_h - (A_\phi \cdot \phi_h - Q)$, darin ist D die Matrix der Diagonalelemente von der Matrix A
+Iterative Methoden sind notwendig da sie nummerisch weniger aufwendig sind zu
+lösen und somit auch schneller und lassen sich parallel ausrechnen. Grundschema
+für einen iterativen Lösungsansatz ist $ D \cdot \phi_h = D_h - (A_\phi \cdot
+\phi_h - Q)$, darin ist D die Matrix der Diagonalelemente von der Matrix A
 
 \subsection{Jacobi and Gauss-Seidel iterative methods}
 Describe the Jacobi and Gauss-Seidel iterative methods
 \begin{itemize}
-\item \textbf{Jacobi iterative method:}  $ \phi ^{(k+1)}_h = D^{-1} \cdot Q - (D^{-1} \cdot A_\phi - \delta)\cdot \phi_h^{(k)}$
+\item \textbf{Jacobi iterative method:}  $ \phi ^{(k+1)}_h = D^{-1} \cdot Q -
+(D^{-1} \cdot A_\phi - \delta)\cdot \phi_h^{(k)}$
 
-Zur Berechnung der Lösung eines linearen Gleichungssystems löse man die i-te Gleichung nach der i-ten Variable auf. Die neuen Näherungswerte für die Lösung berechnet man iterative aus den alten Näherungswerten.
+Zur Berechnung der Lösung eines linearen Gleichungssystems löse man die i-te
+Gleichung nach der i-ten Variable auf. Die neuen Näherungswerte für die Lösung
+berechnet man iterative aus den alten Näherungswerten.
 
-Bemerkung: Zu beachten ist das $\lambda$ (Eigenwert) kleiner 1 sein muss, dass es konvergiert, je kleiner desto langsamer wird es jedoch.\\
-Vorteil: gut paararellisierbar, ziel ist es möglichst nahe an Einheitsmatrix zu kommen\\
+Bemerkung: Zu beachten ist das $\lambda$ (Eigenwert) kleiner 1 sein muss, dass
+es konvergiert, je kleiner desto langsamer wird es jedoch.\\
+Vorteil: gut parallelisierbar, ziel ist es möglichst nahe an Einheitsmatrix zu
+kommen\\
 Nachteil: ...\\
 
 
-\item \textbf{Gauss- Seidel method}: $ \phi ^{(k+1)}_h = D^{-1} \cdot Q - (D^{-1} \cdot [(U\cdot A_\phi ) \cdot \phi_h^{k+1} + (L \cdot A_\phi - \delta)\cdot \phi_h^{(k)}]$
+\item \textbf{Gauss- Seidel method}: $ \phi ^{(k+1)}_h = D^{-1} \cdot Q -
+(D^{-1} \cdot [(U\cdot A_\phi ) \cdot \phi_h^{k+1} + (L \cdot A_\phi -
+\delta)\cdot \phi_h^{(k)}]$
 
-Löse der Reihe nach jede Gleichung nach ihrem Diagonal-Term auf, setzt Startwerte ein, iteriere, verwende jeweils neueste Näherungswerte. Im Gegensatz zum Jacobi-Verfahren verwendet man bei der Berechnung der neuen näherungswerte alle bereits neu berechneten Näherungswerte.\\
+Löse der Reihe nach jede Gleichung nach ihrem Diagonal-Term auf, setzt
+Startwerte ein, iteriere, verwende jeweils neueste Näherungswerte. Im Gegensatz
+zum Jacobi-Verfahren verwendet man bei der Berechnung der neuen Näherungswerte
+alle bereits neu berechneten Näherungswerte.\\
 
 Vorteil: konvergiert schneller\\
 Nachteil: nicht parallelisierbar\\
@@ -659,25 +679,48 @@ Nachteil: nicht parallelisierbar\\
 \subsection{Multi-Grid Methods} 
 Describe the idea behind the multi-grid method
 
-Die Grundidee des Multi-Grid Verfahren ist es, dass aus dem ursprünglichen Rechengitter mit einer charakteristischen Gitterweite h weitere gröbere Rechengitter mit Gitterweiten von beispielsweise 2h,4h, usw. zu erzeugt werden. 
+Die Grundidee des Multi-Grid Verfahren ist es, dass aus dem ursprünglichen
+Rechengitter mit einer charakteristischen Gitterweite h weitere gröbere
+Rechengitter mit Gitterweiten von beispielsweise 2h,4h, usw. zu erzeugt werden.
 \\
-\includegraphics[scale=0.3]{images/multigrid1.png}
 
-Aus dem feinsten Gitter (Zellmittelpunkte offen) ergeben sich durch das Zusammenfassen von jeweils vier Kontrollvolumina die Zellen des nächst gröberen Gitters (Zellmittelpunkte schraffiert). Diese können schliesslich zum gröbsten Gitter (Zellmittelpunkte voll) zusammengefasst werden.
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.3]{images/multigrid1.png}
+\caption{Multigrid Beispiel 1}
+\label{fig:Multigrid1}
+\end{center}
+\end{figure}
+%\includegraphics[scale=0.3]{images/multigrid1.png}
+
+Aus dem feinsten Gitter (Zellmittelpunkte offen) ergeben sich durch das
+Zusammenfassen von jeweils vier Kontrollvolumina die Zellen des nächst gröberen
+Gitters (Zellmittelpunkte schraffiert). Diese können schliesslich zum gröbsten
+Gitter (Zellmittelpunkte voll) zusammengefasst werden.
 \\
-Während des Iterationsprozess werden Lösungen im Wechsel auf den verschiedenen Gittern berechnet, wobei zwischen den Gittern Informationen über die jeweiligen Lösungen ausgetauscht werden.
+Während des Iterationsprozess werden Lösungen im Wechsel auf den verschiedenen
+Gittern berechnet, wobei zwischen den Gittern Informationen über die jeweiligen
+Lösungen ausgetauscht werden.
 \\
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[scale=0.3]{images/multigrid2.png}
+\caption{Multigrid Beispiel 2}
+\label{fig:Multigrid2}
+\end{center}
+\end{figure}
+
+%\includegraphics[scale=0.3]{images/multigrid2.png}
 
 
 \section{The finite volume method for unsteady flows}
 \subsection{Common Schemes} Describe the three common schemes for time
 discretization:
-Um auch instationäre, zeitabhängige Strömungen simulieren zu können, muss in
-die bisher hergeleiteten Gleichungen die Zeit integriert werden. Ausgehend von
-der einfachen Diffeq:
+Um auch instationäre, zeitabhängige Strömungen simulieren zu können, muss in die
+bisher hergeleiteten Gleichungen die Zeit integriert werden. Ausgehend von der
+einfachen Diffeq:
 
-\begin{align}
+\begin{align}s
 \frac{d\phi}{dt}=f(t,\phi(t))
 \end{align}
 Integriert man diese Gleichung über ein Zeitintervall $\Delta_t = t_{n+1}-t_n$
@@ -712,7 +755,7 @@ Je nach Wahl des Paramters $\alpha$ die verschiedenen Methoden. \\
 In Abbildung \ref{fig:81} ist die grafische Representation von obigen
 Gleichungen abgebildet.
 
-\textbf{Herleitung aus Buch CFD-Modellierung, Rüdiger Schwaerze, Springer
+\textbf{Herleitung aus Buch CFD-Modellierung, Rüdiger Schwarze, Springer
 Verlag. Versteeg leitet es anders her und verwendet andere Variablen
 (Parameter Versteeg $\mathbf{\Theta = \alpha}$!)}
 
@@ -789,9 +832,9 @@ Name 5 important boundary\\
   \item inlet (Einlass)
   \item outlet (Auslass)
   \item Wall (Wand)
-  \item Symmetrie: kei Fluss über dend Rand, Implementation: Geschwindigkeit =
+  \item Symmetrie: kein Fluss über den Rand, Implementation: Geschwindigkeit =
   0, alle anderen Properties werden ausserhalb = innerhalb gesetzt
-  \item periodicity (\colorbox{red}{alternativ opening Simon?}) (or cyclic
+  \item periodicity heisst auch opening (or cyclic
   boundary condition): spielt mal Einlass und wieder Auslass, Beispiel zylindrischer
   Ofen, Kraftstoff läuft durch gleiche Fläche rein und wieder raus, abhängig
   Position (Drehung).
@@ -804,7 +847,15 @@ be used in CFD)?\\
 Bei den symmetrischen Flächen geht es darum, dass nur die hälfte eines Objektes
 simuliert wird und die andere hälfte als symmetrisch interpretiert wird.\\
 
+
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[scale=0.6]{images/symmetrie.pdf}
+\caption{Zylindrischer Ofen}
+\label{fig:ofen}
+\end{center}
+\end{figure}
+
 % cut with: pdfcrop --margins '5 -100 5 -120' symmetrie.pdf symmetrie_1.pdf
 
 Ist der Fluss instationär, funktioniert die Symmetriebedingung nicht.\\
@@ -822,7 +873,14 @@ Beispiele:\\
 Why should outlets be placed far away from the interesting flow
 region?\\
 
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[scale=0.8]{images/inlet_error.pdf}
+\caption{Boundary Condition}
+\label{fig:Boundary}
+\end{center}
+\end{figure}
+%\includegraphics[scale=0.8]{images/inlet_error.pdf}
 % cut with: pdfcrop --margins '-100 -130 -100 -120' inlet_error.pdf inlet_error_1.pdf
 
 Bild eigentlich selbsterklärend, in den Worten von Henrik:\\
@@ -839,7 +897,9 @@ Bild eigentlich selbsterklärend, in den Worten von Henrik:\\
 Describe three potential numerical errors in CFD
 \begin{itemize}
 \item \textbf{Disketierungsfehler}: Netz musste unendlich fein sein, um die physikalische Effekte aufzulösen. Aus diesem Grund ist es notwendig verschiedenen Netzen und Zeitschritten eine Netzstudie durchzuführen, so Resultat dasselbe Effekte gibt
-\item \textbf{Rundungsfehler}: Bei Gleitkommazahlen können beim rechnen mit dem Computer Fehler entstehen, dies weil Teile davon beim Rechnen verloren  gehen Meist mit Float.h kann nachgeschaut werden.
+\item \textbf{Rundungsfehler}: Bei Gleitkommazahlen können beim rechnen mit dem
+Computer Fehler entstehen, dies weil Teile davon beim Rechnen verloren gehen.
+Meist mit Float.h kann, nachgeschaut werden.
 \item \textbf{Iterative}: Konvergenzfehler, wenn Residuale welche beim Lösen entstehen nicht stimmen, stimmt die Physik sicher nicht.  
 \end{itemize}
 
@@ -847,7 +907,7 @@ Describe three potential numerical errors in CFD
 Describe two typical physical uncertainties in CFD (uncertainties =
 Unsicherheiten)
 \begin{itemize}
-\item \textbf{limitierte Genauigkeit}
+\item \textbf{limitierte Genauigkeit} $\Rightarrow$ Materialkonstanten
 \item \textbf{fehlen von validierten Submodellen}
 \end{itemize}
 weitere Informationen im Buch Versteeg Seite 291
