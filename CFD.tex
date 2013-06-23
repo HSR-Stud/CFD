@@ -12,9 +12,9 @@
 \usepackage[pdftex]{graphicx}
 \usepackage{fancyhdr}
 \usepackage{color}
+\usepackage{hyperref}
 \newcommand{\qed}{\begin{flushright}
 $\blacksquare \dagger$ \end{flushright}}
-
 
 %\usepackage[ansinew]{inputenc}
 %\usepackage[T1]{fontenc}
@@ -32,9 +32,11 @@ $\blacksquare \dagger$ \end{flushright}}
 \begin{document}
 \pagestyle{fancy}
 \setlength{\footskip}{10mm}
-\fancyhf{}
+\fancyhf{} 
+\fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0.5pt}
+
 
 %\twocolumn[
  \centerline{\LARGE \bf \textsf{MSE CFD}} 
@@ -151,7 +153,7 @@ and LES modelling, including assumptions (what is computed and how, what is mode
 \begin{center}
 \includegraphics[scale=1]{images/51.pdf}
 \caption{RANS Strömung}
-\label{fig:41}
+\label{fig:51}
 \end{center}
 \end{figure}
 
@@ -526,9 +528,33 @@ Beschrieben in Lektion 7, Pressure Velocity Coupling: Folie 6
 \subsection{Differences between momentum equations and general scalar transport
 equations} 
 Differences between momentum equations and general scalar transport
-equations => new aspects to be tackled ??? zu folie 11
+equations => new aspects to be tackled\\
+
+\subsubsection{Momentum equation (Impulsgleichung)}
+Momentum equation (staggered CV)\\
+$(\rho u^2 A)_P - (\rho u^2 A)_W$\\
+Geschwindigkeit wird auf dem versetzten Netz um die Zellenoberfläche
+zentriert berechnet. Der Grund liegt darin, dass der Einfluss des
+Druckes nicht korrekt die diskretisierte Impulsgleichung (Geschwindigkeit)
+repräsentiert. Darum wird das Geschwindigkeitskontrollvolumen verschoben.\\
+
+\textbf{Eigene Erklärung dafür, öbs Sinn macht kei Plan:}\\
+Zusammenhang zwischen Druck und Geschwindigkeit: $p = \frac{F}{A} = \frac{m
+\cdot g \cdot h}{A} \propto g = a = \frac{\partial v}{\partial t}$\\
+Die Ableitung der Geschwindigkeit entspricht dem Druck. Da die Ableitung als
+Differenz zweier Punkte berechnet wird, ist das Resultat zwischen den zwei
+Punkten korrekt und somit macht das verschobene Netz Sinn.
+
+\subsubsection{General scalar transport}
+General scalar transport (node CV)\\
+$(\rho u A \Phi)_e - (\rho u A \Phi)_w$\\
+Skalare variabeln: Druck, Dichte Temperatur, \ldots werden auf den gewöhnlichen
+Knotenpunkten gerechnet
+
+Beschrieben in Lektion 7, Pressure Velocity Coupling: Folie 11
 
 \subsection{SIMPLE}
+\label{sec:SIMPLE}
 Explain the SIMPLE procedure for pressure-velocity coupling\\
 \newline
 SIMPLE: Semi-Implicit Method for Pressure Linked Equations\\
@@ -565,8 +591,14 @@ Zusatzinfos:\\
   \frac{A_{I,J}}{a_{I,J}}$
   \item Druck: p
   \item Geschwindigkeitskomponenten: u, v
-  \item Index \textbf{I-1, I, I+1} für x-Richtung
-  \item Index \textbf{J-1, J, J+1} für y-Richtung
+  \item Index \textbf{I-1, I, I+1} für x-Richtung (effektive Knoten, General
+  scalar Transport)
+  \item Index \textbf{J-1, J, J+1} für y-Richtung (effektive Knoten, General
+  scalar Transport)
+  \item Index \textbf{i-1, i, i+1} für x-Richtung (versetzte Knoten,
+  Impulsgleichung)
+  \item Index \textbf{j-1, j, j+1} für y-Richtung (versetzte Knoten,
+  Impulsgleichung)
 \end{itemize}
 
 Branches von Simple:\\
@@ -583,12 +615,14 @@ Beschrieben in Lektion 7, Pressure Velocity Coupling: Folie 14
 
 
 \subsection{Relaxation Factor and Uses of it}
-Explain the role of relaxation factor. 
-Flussdiagramm siehe Folie 14
- Why are they used?
-folie 20
-\colorbox{red}{Bischi macht}
+Explain the role of relaxation factor. Why are they used?\\
 
+Der Korrekturfaktor wird dazu verwendet um die Konvergenz sicherzustellen. Der
+Faktor muss zwischen 0 und 1 liegen. Bei 0 würde die Berechnete Druckkorrektur
+nicht einfliessen (funktioniert nicht). Bei 1 fliesst die Druckkorrektur voll
+ein, da wird wohl das System instabil (wie P-Regler mit zuviel P-Anteil
+(Regelungstechnik) fängt an zu Osziliieren, da er zuviel korrigiert und im
+nächsten Schritt zuviel zurückkorrigieren muss).
 
 \section{Solution of discretized equations}
 
@@ -635,65 +669,164 @@ Während des Iterationsprozess werden Lösungen im Wechsel auf den verschiedenen
 \section{The finite volume method for unsteady flows}
 \subsection{Common Schemes} Describe the three common schemes for time
 discretization:
+Um auch instationäre, zeitabhängige Strömungen simulieren zu können, muss in
+die bisher hergeleiteten Gleichungen die Zeit integriert werden. Ausgehend von
+der einfachen Diffeq:
 
-Einehitskreis 
+\begin{align}
+\frac{d\phi}{dt}=f(t,\phi(t))
+\end{align}
+Integriert man diese Gleichung über ein Zeitintervall $\Delta_t = t_{n+1}-t_n$
+ergibt sich
+
+\begin{align}
+\phi^{n+1}=\phi^n + \int_{t_n}^{t_{n+1}} f(t,\phi(t))dt
+\end{align}
+ 
+Über eine Diskretisierung folgende Formel hergeleitet werden:
+
+\begin{align}
+\phi^{n+1}=\phi^n + \left[\alpha \cdot f(t_n,\phi^n)+(1-\alpha)\cdot
+f(t_{n+1},\phi^{n+1})\right]\Delta t
+\end{align}
+
+
+Je nach Wahl des Paramters $\alpha$ die verschiedenen Methoden. \\
 \begin{itemize}
-\item Explicit (forward Euler)
-...
+  \item $\alpha = 1$: Explizites Euler Verfahren \begin{align}
+  \phi^{n+1}= \phi^n + f(t_n,\phi^n) \Delta t
+  \end{align}
+  \item $\alpha= 0.5$: Crank Nicholson \begin{align}
+  \phi^{n+1}=\phi^n + \frac{1}{2}
+  \left[f(t_n,\phi^n)+f(t_{n+1},\phi^{n+1})\right]\Delta t
+  \end{align}
+  \item $\alpha = 0$: Implizites Euler Verfahren \begin{align}
+  \phi^{n+1}=\phi^n + f(t_{n+1},\phi^{n+1})\Delta t
+  \end{align}
+\end{itemize}
 
-\item Cranck-Nicholson $\Rightarrow$ CDS
-Könnte Schwingen
-...
+In Abbildung \ref{fig:81} ist die grafische Representation von obigen
+Gleichungen abgebildet.
 
-\item Implicit (backward Euler)
-...
+\textbf{Herleitung aus Buch CFD-Modellierung, Rüdiger Schwaerze, Springer
+Verlag. Versteeg leitet es anders her und verwendet andere Variablen
+(Parameter Versteeg $\mathbf{\Theta = \alpha}$!)}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=1.0]{images/81.pdf}
+\caption{Raum-Zeit Gitter}
+\label{fig:81}
+\end{center}
+\end{figure}
+
+
+
+\subsection{Advantages and disadvantages of the different schemes}
+\textbf{Advantages}:
+\begin{itemize}
+\item \textbf{Explicit (forward Euler)}: Effizient, Einfach zu implementieren.
+
+\item \textbf{Crank-Nicholson}:  Basiert auf Central Differencing, deshalb 2nd
+Order Accuracy. Kleinere Time Step Limitation $\Rightatrrow$ sehr gute Resulate
+bei mässig kleinen Zeitschritten
+
+\item \textbf{Implicit (backward Euler)}: Robust, Stabil für alle Time Step
+Grössen. Generell empfohlen für transiente Probleme.
+ 
 
 \end{itemize}
-\subsection{Advantages and disadvantages of the different schemes}
+
+\textbf{Disadvantages}:
 \begin{itemize}
-\item Explicit (forward Euler)
-Schnell
+\item \textbf{Explicit (forward Euler)}: Time Step Limit $\Rightarrow$ Um eine
+höhere räumliche Auflösungen zu erhalten müssen die Zeitschritte im Quadrat dazu
+reduziert werden (Versteeg S.247). Rechenpower! Deshalb für transiente Probleme
+nicht empfohlen.
 
-\item Cranck-Nicholson
-Instabil, aber genau
+\item \textbf{Crank-Nicholson}: Ebenfalls Time Step Limit $\Rightarrow$ Weniger
+ausgeprägt. (Versteeg S.248)
 
-\item Implicit (backward Euler)
-Robust 
+\item \textbf{Implicit (backward Euler)}: Verfahren erster Ordnung $\Rightarrow$
+Deshalb müssen genügend kleine Time Steps gewählt werden um eine entsprechende
+Genauigkeit zu erhalten. (Rechenpower!)
+
 \end{itemize}
 \subsection{SIMPLE scheme}
 How does the SIMPLE scheme have to be modified for a transient
 simulation?
+ 
+Das SIMPLE Scheme muss für transiente Strömungen folgendermassen erweitert
+werden. Es muss ein zeitlich abhängiger Druckkorrekturterm hinzugefügt werden
+(Kontigleichung):
 
-\colorbox{red}{Domi}
+\begin{align}
+\frac{\partial \rho}{\partial t} + \nabla (\rho \mathbf{u}) 
+\end{align}
+
+Die führt zum Algorithmus der in Abbildung \ref{fig:82} abgebildet ist. (Siehe
+auch Kapitel \ref{sec:SIMPLE})
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=1.0]{images/82.pdf}
+\caption{Angepasster SIMPLE Algorithmus}
+\label{fig:82}
+\end{center}
+\end{figure}
 
 
 \section{Implementation of boundary conditions}
 
-
 \subsection{5 important boundary conditions}
+Name 5 important boundary\\
 
- Name 5 important boundary
-conditions Dirichlet boundary conditions
-Neumann boundary conditions
-Robin bandary  condition
+\begin{itemize}
+  \item inlet (Einlass)
+  \item outlet (Auslass)
+  \item Wall (Wand)
+  \item Symmetrie: kei Fluss über dend Rand, Implementation: Geschwindigkeit =
+  0, alle anderen Properties werden ausserhalb = innerhalb gesetzt
+  \item periodicity (\colorbox{red}{alternativ opening Simon?}) (or cyclic
+  boundary condition): spielt mal Einlass und wieder Auslass, Beispiel zylindrischer
+  Ofen, Kraftstoff läuft durch gleiche Fläche rein und wieder raus, abhängig
+  Position (Drehung).
+\end{itemize}
 
 
-inelt
-outlet
-wall
-
-
-
-\subsection{Why cannot symmetry planes (and symmetry boundary conditions always
-be used in CFD)?}
+\subsection{symmetry planes and symmetry boundary conditions}
 Why cannot symmetry planes (and symmetry boundary conditions always
-be used in CFD)
-\subsection{Why should outlets be placed far away from the interesting flow
-region?}
- weil am anfang am rand falsche randbedingungen sind, siehe bild silvio,
-slide 38
+be used in CFD)?\\
+Bei den symmetrischen Flächen geht es darum, dass nur die hälfte eines Objektes
+simuliert wird und die andere hälfte als symmetrisch interpretiert wird.\\
 
-\colorbox{red}{Bischi}
+\includegraphics[scale=0.6]{images/symmetrie.pdf}
+% cut with: pdfcrop --margins '5 -100 5 -120' symmetrie.pdf symmetrie_1.pdf
+
+Ist der Fluss instationär, funktioniert die Symmetriebedingung nicht.\\
+
+Beispiele:\\
+\begin{itemize}
+  \item Bild: Gasfluss in Objekt rein, abhängig der Geschwindigkeit gibt es ein
+  Oszillieren mit einer gewissen Frequenz. Anwendung: Gasmeter (für
+  verschiedene Gase synGas, Erdgas, \ldots)
+  \item Turbulente Strömungen um einen Kreis herum, bei dem die Strömung
+  oszilliert
+\end{itemize}
+
+\subsection{Outlets and interesting flow region}
+Why should outlets be placed far away from the interesting flow
+region?\\
+
+\includegraphics[scale=0.8]{images/inlet_error.pdf}
+% cut with: pdfcrop --margins '-100 -130 -100 -120' inlet_error.pdf inlet_error_1.pdf
+
+Bild eigentlich selbsterklärend, in den Worten von Henrik:\\
+\begin{itemize}
+  \item Boundary conditions are always bad!
+  \item There are no boundaries in real life.
+\end{itemize}
+
 
 \section{Errors and uncertainty in CFD modelling}
 
